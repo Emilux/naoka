@@ -1,0 +1,89 @@
+version: '3'
+
+services:
+  app:
+    build: ./docker/php
+    container_name: naoka
+    restart: unless-stopped
+    volumes:
+      - ./${LARAVEL_PATH:-laravel}:/var/www/html
+      - ./docker/certs:/certs
+      - ./docker/apache/sites-available:/etc/apache2/sites-available
+    expose:
+      - 80
+      - 443
+    environment:
+      VIRTUAL_HOST: ${LARAVEL_URL:-naoka.io}
+      VIRTUAL_PORT: 443
+      VIRTUAL_PROTO: https
+      CERTIF_NAME: ${CERTIF_NAME:-naoka.io}
+    networks:
+      - naokanet
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    tty: true
+    container_name: dedomena
+    restart: unless-stopped
+    ports:
+      - ${DB_PORT:-3306}:3306
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-naoka}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-naoka1234}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dedomena:/var/lib/mysql/
+    networks:
+      - naokanet
+
+  phpmyadmin:
+    build: ./docker/pma
+    container_name: pmadedomena
+    restart: unless-stopped
+    depends_on:
+      - db
+    expose:
+      - 443
+    environment:
+      VIRTUAL_HOST: ${PMA_URL:-pma.naoka.io}
+      VIRTUAL_PORT: 443
+      VIRTUAL_PROTO: https
+      CERTIF_NAME: ${CERTIF_NAME:-naoka.io}
+    volumes:
+      - ./docker/certs:/certs
+    networks:
+      - naokanet
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    container_name: naokatcher
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: ${MAILCATCHER_URL:-mail.naoka.io}
+      VIRTUAL_PORT: 1080
+    networks:
+      - naokanet
+
+  nginx-proxy:
+    hostname: naokanet
+    image: jwilder/nginx-proxy
+    container_name: redwire
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ~/certs:/etc/nginx/certs
+    networks:
+      - naokanet
+
+networks:
+  naokanet:
+    driver: bridge
+#Volumes
+volumes:
+  dedomena:
+    driver: local
