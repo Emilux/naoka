@@ -2,17 +2,15 @@
 
 Use Naoka to create kanban boards easily and quickly, for you and your team.
 
-## Configuration 
+## Configuration
 
-### Docker
-
-#### SSL
-To use this project an SSL Certificat is needed so you need to generate one.
+### SSL
+To use this project an SSL Certificate is needed, so you need to generate one.
 
 To do that you can use [mkcert](https://github.com/FiloSottile/mkcert).
 Mkcert is a simple tool for making locally-trusted development certificates.
 
-##### Installation
+#### Mkcert installation
 You can install mkcert by following the instructions on this link : https://github.com/FiloSottile/mkcert#installation
 
 #### Generate SSL
@@ -25,7 +23,7 @@ mkcert -cert-file "naoka.io.crt" -key-file "naoka.io.key" "*.naoka.io"
 
 Your SSL Certificate and his key are know generated in the certs directory.
 
-#### .ENV
+### .ENV
 
 If you want to personalize your docker configuration you can create a .env file at the root of the project.
 You can't simply duplicate the .env.example file and keep the needed environment variables.
@@ -50,12 +48,12 @@ PMA_URL=phpmyadmin domain url
 MAILCATCHER_URL=mailcatcher domain url
 ```
 
-#### HOSTS
+### HOSTS
 
 Now that you have created the SSL Certificates and configured the .env file,
 you need to add your domain and subdomains (For PHPmyadmin and Mailcatcher) to the hosts file of your OS
 
-##### The line to add in the hosts file :
+#### The line to add in the hosts file :
 
 ```
 # The main website domain
@@ -68,7 +66,7 @@ you need to add your domain and subdomains (For PHPmyadmin and Mailcatcher) to t
 127.0.0.1 mail.naoka.io
 ```
 
-##### Edit hosts on macOs and linux
+#### Edit hosts on macOs and linux
 
 ```
 sudo vi /etc/hosts
@@ -77,7 +75,7 @@ sudo vi /etc/hosts
 Press ```A``` to edit the file and when it's done press ```Echap```, 
 write ```:wq``` and finally press ```Enter```.
 
-##### Edit hosts on Windows
+#### Edit hosts on Windows
 
 Go to ```c:\Windows\System32\Drivers\etc\``` in your explorer and copy/paste the hosts file 
 to your desktop. 
@@ -85,7 +83,7 @@ Right-click on the hosts file on your desktop and click "Edit".
 Add the content you need and save. When the file is saved take it and drop it back in the ```c:\Windows\System32\Drivers\etc\```
 directory.
 
-##### Run the docker-compose.yaml
+#### Run the docker-compose.yaml
 
 When all the configuration are done, open your terminal in the root directory of the project and write the command : 
 
@@ -95,7 +93,7 @@ docker-compose up -d
 
 And that's it ! now you can access to your project on your browser using the domain that you configured.
 
-#### Add apache site root directory 
+### Add apache site root directory 
 
 For the moment your server have no root directory where you add all your website file.
 You need to create a directory at the root of the project. By default apache will load a directory named ```laravel```
