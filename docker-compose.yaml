@@ -76,7 +76,7 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ~/certs:/etc/nginx/certs
+      - ./docker/certs:/etc/nginx/certs
     networks:
       - naokanet
 
