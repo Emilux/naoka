@@ -96,8 +96,12 @@ And that's it ! now you can access to your project on your browser using the dom
 ### Add apache site root directory 
 
 For the moment your server have no root directory where you add all your website file.
-You need to create a directory at the root of the project. By default apache will load a directory named ```laravel```
-Unless you add and fill the ```LARAVEL_URL``` variable in the .env file.
+You need to create a directory at the root of the project. By default apache will load a the directory ```public``` in a directory named ```laravel```
+Unless you add and fill the ```LARAVEL_URL``` variable in the .env file with your custom root directory path.
+
+!! APACHE WILL LOAD THE ```public``` directory in your root directory, example : if your 
+root directory name is ```laravel``` apache will load ```laravel/public```
+!!
 
 
 
