@@ -103,7 +103,26 @@ root directory name is ```laravel``` apache will load ```laravel/public```
 !!
 
 
+## Documentation
+
+### Laravel
+Laravel is a web application framework, open sources.
+#### Official documentation
+https://laravel.com/docs/8.x
 
 
+### InertiaJs
+Inertia is a solution between your backend and the frontend, all without the API system.
+#### Official documentation
+https://inertiajs.com/
 
 
+### JetStream
+Jet Stream is a starter kit for Laravel application. He implement the authentication system, and optionally, team management.
+#### Official documentation
+https://jetstream.laravel.com/2.x/introduction.html
+
+### TailwindCss
+Tailwind is a modular CSS frameword using classes and components to create your CSS.
+#### Official documentation
+https://tailwindcss.com/docs/guides/laravel
