@@ -1,3 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+[type='checkbox']:checked:hover, [type='checkbox']:checked:focus, 
+[type='radio']:checked:hover, [type='radio']:checked:focus, 
+[type='checkbox']:checked, [type='radio']:checked {
+    color: rgb(48,26,75);
+}
