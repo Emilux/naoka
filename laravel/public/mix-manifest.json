@@ -1,4 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/assets/img/Ellipse1.svg": "/assets/img/Ellipse1.svg",
+    "/assets/img/Ellipse2.svg": "/assets/img/Ellipse2.svg",
+    "/assets/img/Ellipse3.svg": "/assets/img/Ellipse3.svg"
 }

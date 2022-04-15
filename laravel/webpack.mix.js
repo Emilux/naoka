@@ -18,6 +18,13 @@ mix.js('resources/js/app.js', 'public/js').vue()
     ])
     .webpackConfig(require('./webpack.config'));
 
+mix.copy([
+    'resources/img/auth/Ellipse1.svg',
+    'resources/img/auth/Ellipse2.svg',
+    'resources/img/auth/Ellipse3.svg'
+], 'public/assets/img');
+
+
 if (mix.inProduction()) {
     mix.version();
 }

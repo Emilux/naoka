@@ -2,9 +2,6 @@
     <Head title="Two-factor Confirmation" />
 
     <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
 
         <div class="mb-4 text-sm text-gray-600">
             <template v-if="! recovery">
