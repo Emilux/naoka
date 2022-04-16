@@ -1,5 +1,5 @@
 <template>
-    <input class="border-default placeholder-purple border-purple focus:border-purple focus:ring-purple rounded-xl shadow-sm shadow-purple" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="input">
+    <input class="border-default px-4 py-4 placeholder-purple border-2 border-purple font-semibold focus:border-purple focus:ring-purple rounded-xl" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="input">
 </template>
 
 <script>

@@ -1,8 +1,6 @@
 <template>
-    <span class="absolute left-4 top-2">
-        <svg width="25" height="25" viewBox="0 0 28 17" xmlns="http://www.w3.org/2000/svg">
-            <slot></slot>
-        </svg>
+    <span class="absolute left-4 flex top-0 justify-center items-center h-full text-3xl text-purple">
+        <slot/>
     </span>
 </template>
 

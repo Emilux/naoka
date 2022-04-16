@@ -1,0 +1,327 @@
+@font-face {
+  font-family: 'Naoka';
+  src:  url('fonts/Naoka.eot?1sj606');
+  src:  url('fonts/Naoka.eot?1sj606#iefix') format('embedded-opentype'),
+  url('fonts/Naoka.ttf?1sj606') format('truetype'),
+  url('fonts/Naoka.woff?1sj606') format('woff'),
+  url('fonts/Naoka.svg?1sj606#Naoka') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.naoka-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Naoka' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.SolidAddCalendar:before {
+  content: "\e900";
+}
+.SolidAddClock:before {
+  content: "\e901";
+}
+.SolidAddMember:before {
+  content: "\e902";
+}
+.SolidAddPalette:before {
+  content: "\e903";
+}
+.SolidAddTag:before {
+  content: "\e904";
+}
+.SolidAddTeam:before {
+  content: "\e905";
+}
+.SolidAppMenu:before {
+  content: "\e906";
+}
+.SolidArchive:before {
+  content: "\e907";
+}
+.SolidBell:before {
+  content: "\e908";
+}
+.SolidBook:before {
+  content: "\e909";
+}
+.SolidBookOpen:before {
+  content: "\e90a";
+}
+.SolidBrokenLink:before {
+  content: "\e90b";
+}
+.SolidBurger:before {
+  content: "\e90c";
+}
+.SolidCalendar:before {
+  content: "\e90d";
+}
+.SolidCamera:before {
+  content: "\e90e";
+}
+.SolidCheck:before {
+  content: "\e90f";
+}
+.SolidChevronDown:before {
+  content: "\e910";
+}
+.SolidChevronLeft:before {
+  content: "\e911";
+}
+.SolidChevronRight:before {
+  content: "\e912";
+}
+.SolidChevronUp:before {
+  content: "\e913";
+}
+.SolidClock:before {
+  content: "\e914";
+}
+.SolidClosedLocker:before {
+  content: "\e915";
+}
+.SolidCloseEye:before {
+  content: "\e916";
+}
+.SolidCog:before {
+  content: "\e917";
+}
+.SolidCopyPaste:before {
+  content: "\e918";
+}
+.SolidCross:before {
+  content: "\e919";
+}
+.SolidCursor:before {
+  content: "\e91a";
+}
+.SolidDashboard:before {
+  content: "\e91b";
+}
+.SolidDeleteCalendar:before {
+  content: "\e91c";
+}
+.SolidDeleteClock:before {
+  content: "\e91d";
+}
+.SolidDeletePalette:before {
+  content: "\e91e";
+}
+.SolidDeleteTag:before {
+  content: "\e91f";
+}
+.SolidDeleteTeam:before {
+  content: "\e920";
+}
+.SolidDeleteUser:before {
+  content: "\e921";
+}
+.SolidDoubleDowngrade:before {
+  content: "\e922";
+}
+.SolidDoubleUpgrade:before {
+  content: "\e923";
+}
+.SolidDownArrow:before {
+  content: "\e924";
+}
+.SolidEdit:before {
+  content: "\e925";
+}
+.SolidEditCalendar:before {
+  content: "\e926";
+}
+.SolidEditClock:before {
+  content: "\e927";
+}
+.SolidEditPalette:before {
+  content: "\e928";
+}
+.SolidEditTag:before {
+  content: "\e929";
+}
+.SolidEditTeam:before {
+  content: "\e92a";
+}
+.SolidEditUser:before {
+  content: "\e92b";
+}
+.SolidEqual:before {
+  content: "\e92c";
+}
+.SolidFolder:before {
+  content: "\e92d";
+}
+.SolidGrapPoint:before {
+  content: "\e92e";
+}
+.SolidHearth:before {
+  content: "\e92f";
+}
+.SolidHelp:before {
+  content: "\e930";
+}
+.SolidHistory:before {
+  content: "\e931";
+}
+.SolidHome:before {
+  content: "\e932";
+}
+.SolidHorizontalDragPoints:before {
+  content: "\e933";
+}
+.SolidHourGlass:before {
+  content: "\e934";
+}
+.SolidInfo:before {
+  content: "\e935";
+}
+.SolidKey:before {
+  content: "\e936";
+}
+.SolidLeftArrow:before {
+  content: "\e937";
+}
+.SolidLink:before {
+  content: "\e938";
+}
+.SolidLoading:before {
+  content: "\e939";
+}
+.SolidLogIn:before {
+  content: "\e93a";
+}
+.SolidLogOut:before {
+  content: "\e93b";
+}
+.SolidMail:before {
+  content: "\e93c";
+}
+.SolidMap:before {
+  content: "\e93d";
+}
+.SolidMarker:before {
+  content: "\e93e";
+}
+.SolidMoon:before {
+  content: "\e93f";
+}
+.SolidMouse:before {
+  content: "\e940";
+}
+.SolidOpenedLocker:before {
+  content: "\e941";
+}
+.SolidOpenEye:before {
+  content: "\e942";
+}
+.SolidOptionDot:before {
+  content: "\e943";
+}
+.SolidOptionDotHorizontal:before {
+  content: "\e944";
+}
+.SolidPalette:before {
+  content: "\e945";
+}
+.SolidPause:before {
+  content: "\e946";
+}
+.SolidPhone:before {
+  content: "\e947";
+}
+.SolidPlay:before {
+  content: "\e948";
+}
+.solidPlus:before {
+  content: "\e949";
+}
+.SolidPointer:before {
+  content: "\e94a";
+}
+.SolidProhibited:before {
+  content: "\e94b";
+}
+.SolidReload:before {
+  content: "\e94c";
+}
+.SolidRightArrow:before {
+  content: "\e94d";
+}
+.SolidScreen:before {
+  content: "\e94e";
+}
+.SolidSearch:before {
+  content: "\e94f";
+}
+.SolidServer:before {
+  content: "\e950";
+}
+.SolidSettings:before {
+  content: "\e951";
+}
+.SolidShare:before {
+  content: "\e952";
+}
+.SolidSimpleDowngrade:before {
+  content: "\e953";
+}
+.SolidSimpleUpgrade:before {
+  content: "\e954";
+}
+.SolidStar:before {
+  content: "\e955";
+}
+.SolidSun:before {
+  content: "\e956";
+}
+.SolidSwitchActive:before {
+  content: "\e957";
+}
+.SolidSwitchInactive:before {
+  content: "\e958";
+}
+.SolidTag:before {
+  content: "\e959";
+}
+.SolidTeam:before {
+  content: "\e95a";
+}
+.SolidThumbnail:before {
+  content: "\e95b";
+}
+.solidTrash:before {
+  content: "\e95c";
+}
+.SolidUpArrow:before {
+  content: "\e95d";
+}
+.SolidUser:before {
+  content: "\e95e";
+}
+.SolidVerticalDragPoints:before {
+  content: "\e95f";
+}
+.SolidWarn:before {
+  content: "\e960";
+}
+.SolidWorldGlobe:before {
+  content: "\e961";
+}
+.SolidZoomIn:before {
+  content: "\e962";
+}
+.SolidZoomOut:before {
+  content: "\e963";
+}
