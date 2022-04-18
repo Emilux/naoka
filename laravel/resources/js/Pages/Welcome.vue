@@ -35,11 +35,11 @@
                 </p>
                 <a class="hover:bg-naoka-blue-hover transition-colors inline-block bg-naoka-blue text-white py-2 px-4 sm:px-16 rounded-xl text-xs sm:text-base font-raleway font-semibold" href="#">Learn more</a>
             </div>
-            <div class="some-section md:pl-16 relative">
-                <img class="z-10 relative" src="../../img/home/kanban_illustration.png" alt="">
-                <div data-speed="3" class="z-0 absolute w-8 sm:w-12 h-8 sm:h-12 bg-naoka-purple -top-16 left-36 rounded-full"></div>
-                <div data-speed="2" class="z-0 absolute w-10 sm:w-16 h-10 sm:h-16 bg-naoka-blue top-0 -right-4 rounded-full"></div>
-                <div data-speed="1" class="z-0 absolute w-16 sm:w-28 h-16 sm:h-28 bg-naoka-yellow left-8 -bottom-8 rounded-full"></div>
+            <div class="md:pl-16 relative some-section">
+                <img class="z-10 relative" src="/images/kanban_illustration.png" alt="">
+                <div id="bubble1" class="z-0 absolute w-8 sm:w-12 h-8 sm:h-12 bg-naoka-purple -top-16 left-36 rounded-full"></div>
+                <div id="bubble2" class="z-0 absolute w-10 sm:w-16 h-10 sm:h-16 bg-naoka-blue top-0 -right-4 rounded-full"></div>
+                <div id="bubble3" class="z-0 absolute w-16 sm:w-28 h-16 sm:h-28 bg-naoka-yellow left-8 -bottom-8 rounded-full"></div>
             </div>
         </section>
         <section class="bg-naoka-blue py-36 md:py-32 px-11 relative overflow-hidden sm:rounded-section container">
@@ -59,7 +59,7 @@
             </div>
         </section>
         <section class="py-16 container">
-            <div class="px-8 pt-8 shadow-base rounded-xl pb-28 md:pb-8 text-center md:w-2/5 md:mx-auto">
+            <div id="section" class="px-8 pt-8 shadow-base rounded-xl pb-28 md:pb-8 text-center md:w-2/5 md:mx-auto">
                 <h2 class="font-semibold mb-8 ">Lorem ipsum dolor ipsumeto</h2>
                 <div class="text-left mb-8">
                     <p class="mb-4">
@@ -107,21 +107,42 @@ export default defineComponent({
     },
     methods: {
         scrollAnimation() {
-            let postsSection = document.querySelector('.some-section')
-
-            console.log(postsSection.offsetHeight)
-
-            // apply parallax effect to any element with a data-speed attribute
-            gsap.to("[data-speed]", {
-                y: (i, el) => (parseFloat(el.getAttribute("data-speed"))) * (postsSection.offsetHeight / 3),
-                ease: "none",
-                scrollTrigger: {
-                    trigger:postsSection,
-                    invalidateOnRefresh: true,
-                    scrub: 1,
-                    start: "top"
+            gsap.fromTo('#section',
+                {
+                    scale : 0.9,
+                    x:150
+                },
+                {
+                    scrollTrigger : {
+                        scrub: 0
+                    },
+                    scale: 1,
+                    x:0
                 }
-            });
+
+            )
+
+            gsap.to('#bubble1', {
+                scrollTrigger : {
+                    scrub: 0
+                },
+                y: 300,
+                x:-50
+            })
+            gsap.to('#bubble2', {
+                scrollTrigger : {
+                    scrub: 0
+                },
+                y: 200,
+                x:50
+            })
+            gsap.to('#bubble3', {
+                scrollTrigger : {
+                    scrub: 0
+                },
+                y: 100,
+                x:100
+            })
         },
     }
 })
