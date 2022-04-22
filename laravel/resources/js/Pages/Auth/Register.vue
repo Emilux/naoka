@@ -64,8 +64,6 @@
 
     </jet-authentication-card>
 
-    <AuthFooter />
-
 </template>
 
 <script>
@@ -79,7 +77,6 @@
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
     import SpanInput from "@/Jetstream/SpanInput.vue";
     import AuthTitle from "@/Jetstream/AuthTitle.vue";
-    import AuthFooter from "@/Jetstream/AuthFooter.vue";
     import { Head, Link } from '@inertiajs/inertia-vue3';
 
     export default defineComponent({
@@ -95,7 +92,6 @@
             Link,
             SpanInput,
             AuthTitle,
-            AuthFooter,
         },
 
         data() {
