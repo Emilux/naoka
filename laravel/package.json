@@ -26,7 +26,7 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "gsap": "^3.10.3",
-        "vue-rellax": "^0.2.0"
+        "detect-touch-device": "^1.1.6",
+        "gsap": "^3.10.3"
     }
 }
