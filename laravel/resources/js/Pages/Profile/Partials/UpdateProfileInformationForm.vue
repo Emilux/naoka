@@ -1,71 +1,91 @@
 <template>
-    <jet-form-section @submitted="updateProfileInformation">
-        <template #title>
-            Profile Information
-        </template>
+    <div class="px-4 py-5 bg-white sm:p-6 sm:rounded-tl-md sm:rounded-tr-md flex sm:flex-row flex-col sm:items-center">
+        <!-- Profile Photo -->
+        <div class=" mr-12" v-if="$page.props.jetstream.managesProfilePhotos">
 
-        <template #description>
-            Update your account's profile information and email address.
-        </template>
-
-        <template #form>
-            <!-- Profile Photo -->
-            <div class="col-span-6 sm:col-span-4" v-if="$page.props.jetstream.managesProfilePhotos">
-                <!-- Profile Photo File Input -->
-                <input type="file" class="hidden"
-                            ref="photo"
-                            @change="updatePhotoPreview">
-
-                <jet-label for="photo" value="Photo" />
-
-                <!-- Current Profile Photo -->
-                <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+            <!-- Current Profile Photo -->
+            <div class="relative w-fit">
+                <div class="mt-2">
+                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-24 sm:h-32 w-24 sm:w-32 object-cover">
                 </div>
 
-                <!-- New Profile Photo Preview -->
-                <div class="mt-2" v-show="photoPreview">
-                    <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
-                          :style="'background-image: url(\'' + photoPreview + '\');'">
-                    </span>
+                <div class="absolute top-0 right-0 z-10">
+                    <button :type="type" @click="updateAvatar" class="flex items-center justify-center bg-blue text-gray font-semibold rounded-full border-2 border-white tracking-widest disabled:opacity-25 transition p-3 h-11 w-11">
+                        <i class="naoka-icon SolidEdit text-3xl"></i>
+                    </button>
                 </div>
-
-                <jet-secondary-button class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
-                    Select A New Photo
-                </jet-secondary-button>
-
-                <jet-secondary-button type="button" class="mt-2" @click.prevent="deletePhoto" v-if="user.profile_photo_path">
-                    Remove Photo
-                </jet-secondary-button>
-
-                <jet-input-error :message="form.errors.photo" class="mt-2" />
             </div>
 
+        </div>
+
+        <div>
             <!-- Name -->
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
-            </div>
+            <p class="mb-1">{{ user.name }}</p>
 
             <!-- Email -->
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
-                <jet-input-error :message="form.errors.email" class="mt-2" />
-            </div>
+            <p class="">{{ user.email }}</p>
+        </div>
+
+
+    </div>
+
+    <jet-dialog-modal :show="updateAvatarUser" @close="closeModal">
+        <template #title>
+            Update your avatar
         </template>
 
-        <template #actions>
-            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
-            </jet-action-message>
+        <template #content>
+            <jet-form-section @submitted="updateProfileInformation">
+                <template #form>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
-            </jet-button>
+                    <!-- Profile Photo -->
+                    <div class="flex items-center" v-if="$page.props.jetstream.managesProfilePhotos">
+
+                        <input type="file" class="hidden" ref="photo" @change="updatePhotoPreview"/>
+
+                        <!-- Current Profile Photo -->
+                        <div class="mt-2 mr-8" v-show="! photoPreview">
+                            <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+                        </div>
+
+                        <!-- New Profile Photo Preview -->
+                        <div class="mt-2 mr-8" v-show="photoPreview">
+                            <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
+                                :style="'background-image: url(\'' + photoPreview + '\');'">
+                            </span>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <jet-secondary-button class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
+                                Select A New Photo
+                            </jet-secondary-button>
+
+                            <jet-secondary-button type="button" class="mt-2" @click.prevent="deletePhoto" v-if="user.profile_photo_path">
+                                Remove Photo
+                            </jet-secondary-button>
+                        </div>
+
+                    </div>
+
+                    <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Save
+                    </jet-button>
+
+                </template>
+
+                <template #actions>
+                    <jet-input-error :message="form.errors.photo" class="mt-2" />
+                </template>
+            </jet-form-section>
         </template>
-    </jet-form-section>
+
+        <template #footer>
+            <jet-secondary-button @click="closeModal">
+                Cancel
+            </jet-secondary-button>
+        </template>
+    </jet-dialog-modal>
+
 </template>
 
 <script>
@@ -77,6 +97,10 @@
     import JetLabel from '@/Jetstream/Label.vue'
     import JetActionMessage from '@/Jetstream/ActionMessage.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+    import SpanInput from '@/Jetstream/SpanInput.vue'
+    import JetDialogModal from '@/Jetstream/DialogModal.vue'
+
+
 
     export default defineComponent({
         components: {
@@ -87,6 +111,8 @@
             JetInputError,
             JetLabel,
             JetSecondaryButton,
+            SpanInput,
+            JetDialogModal,
         },
 
         props: ['user'],
@@ -101,10 +127,20 @@
                 }),
 
                 photoPreview: null,
+                updateAvatarUser: false,
             }
         },
 
         methods: {
+            updateAvatar() {
+                this.updateAvatarUser = true;
+            },
+            
+            closeModal() {
+                this.updateAvatarUser = false
+                this.form.reset()
+            },
+
             updateProfileInformation() {
                 if (this.$refs.photo) {
                     this.form.photo = this.$refs.photo.files[0]
@@ -113,7 +149,7 @@
                 this.form.post(route('user-profile-information.update'), {
                     errorBag: 'updateProfileInformation',
                     preserveScroll: true,
-                    onSuccess: () => (this.clearPhotoFileInput()),
+                    onSuccess: () => ([this.clearPhotoFileInput(), this.updateAvatarUser = false]),
                 });
             },
 
@@ -150,6 +186,7 @@
                     this.$refs.photo.value = null;
                 }
             },
+
         },
     })
 </script>
