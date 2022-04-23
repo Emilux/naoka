@@ -9,3 +9,7 @@
 [type='checkbox']:checked, [type='radio']:checked {
     color: rgb(48,26,75);
 }
+
+.antialiased{
+    image-rendering: -webkit-optimize-contrast;
+}
