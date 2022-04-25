@@ -9,3 +9,15 @@
 [type='checkbox']:checked, [type='radio']:checked {
     color: rgb(48,26,75);
 }
+
+.show-participant .show-participant-hidden {
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+    visibility: hidden;
+}
+
+.show-participant:hover .show-participant-hidden {
+    visibility: visible;
+    opacity: 1;
+}

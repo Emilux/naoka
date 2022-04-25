@@ -1,4 +1,6 @@
 <template>
+    <div class="shadow-base flex-shrink-0 flex flex-col justify-between w-72 mx-6 border-2 hover:bg-white-hover border-naoka-purple p-4 rounded-3xl">
+        <div class="flex justify-end font-semibold">#NK</div>
         <div class="py-8 px-10">
             <h2 class="text-center font-raleway text-lg">{{board.name}}</h2>
         </div>
@@ -8,6 +10,7 @@
                 <i class="naoka-icon SolidCog"></i>
             </button>
         </div>
+    </div>
 </template>
 
 <script>

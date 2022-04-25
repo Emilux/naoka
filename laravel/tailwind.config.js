@@ -35,14 +35,16 @@ module.exports = {
                 "DEFAULT":"#301A4B",
                 "hover":"#27153D"
             },
+            "naoka-red": "#D24E4E",
+            "naoka-grey": "#f1f1f1",
             white: {
                 "DEFAULT":"#FFFFFF",
                 "hover":"#f3f3f3"
             },
             black:"#231F27",
-            'blue': '#00adb5',
-            'purple': '#301a4b',
-            'yellow': '#fed766',
+            blue: '#00adb5',
+            purple: '#301a4b',
+            yellow: '#fed766',
         },
         extend: {
             boxShadow: {

@@ -4,21 +4,34 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Board;
+use App\Models\Membership;
+use DB;
 use Illuminate\Http\Request;
-use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardsController extends Controller
 {
     /**
-     * Get All Team for a users
+     * Get boards and collaborateur for the current team
+     * @TODO add link parameter in CardKanban
+     * @TODO add identifiant for a kanban in CardKanban
+     * 
      */
     public function index()
     {
         $boards = Board::where('team_id', Auth::user()->current_team_id)->orderBy('updated_at')->get();
-        // dd($boards);
+        $users = DB::table('team_user')
+                ->join('users', function ($join) {
+                    $join
+                        ->on('team_user.id', '=', 'users.id')
+                        ->where('team_user.team_id', '=', Auth::user()->current_team_id);
+                })
+                ->select('users.name', 'users.profile_photo_path')
+                ->get();
+        // dd($users);
         return Inertia::render('Dashboard', [
-            'boards' => $boards
+            'boards' => $boards,
+            'CollaborateUsers' => $users,
         ]);
     }
 }

@@ -28,3 +28,9 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', 
         [DashboardsController::class, 'index'])
     ->name('dashboard');
+
+
+// Remove after the merge with Emilien's branch
+Route::prefix('boards')->as('boards.')->group(function () {
+    Route::get('create', 'DashboardsController@index')->name('create');
+});
