@@ -1,21 +1,18 @@
 <template>
     <section class="my-16 text-naoka-purple font-raleway">
-        <div class="container">
-            <h1 class="text-center text-2xl font-red-hat font-bold">Teams</h1>
-        </div>
         <div class="mt-12">
             <div class="container lg:w-[1056px]">
                 <div class="mx-6">
                     <div class="flex justify-between items-center flex-wrap">
                         <div><h2 class="text-lg">Emilien's team</h2></div>
-                        <button class="flex items-center hover:bg-naoka-blue-hover transition-colors inline-block bg-naoka-blue text-white py-2 px-3.5 rounded-xl text-xs sm:text-sm font-raleway font-semibold">
-                        <i class="naoka-icon solidPlus mr-1"></i>
-                        <span>Create kanban</span>
+                        <button class="flex items-center hover:bg-naoka-blue-hover transition-colors bg-naoka-blue text-white py-2 px-3.5 rounded-xl text-xs sm:text-sm font-raleway font-semibold">
+                            <i class="naoka-icon solidPlus mr-1"></i>
+                            <span>Create kanban</span>
                         </button>
                     </div>
 
                     <div class="flex items-center justify-between mt-4 flex-wrap">
-                        <div class="flex items-center flex">
+                        <div class="flex items-center">
                             <div class="bg-naoka-red -mr-4 w-8 h-8 rounded-full"></div>
                             <div class="bg-naoka-yellow -mr-4 w-8 h-8 rounded-full"></div>
                             <div class="bg-naoka-blue -mr-4 w-8 h-8 rounded-full"></div>
@@ -37,9 +34,9 @@
             <div class="flex flex-col mt-8 overflow-auto hide-scrollbar">
                 <div class="flex mx-auto">
                     <div class="flex container">
-                        <CardKanban/>
-                        <CardKanban/>
-                        <CardKanban/>
+                        <div v-for="board in boards" class="shadow-base flex-shrink-0 flex flex-col justify-between w-72 mx-6 border-2 border-naoka-purple p-4 rounded-3xl">
+                            <CardKanban :board="board"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,15 +46,15 @@
 
 <script>
     import { defineComponent } from 'vue'
-    import CardKanban from "@/Dashbord/CardKanban.vue";
+    import CardKanban from "@/components/Dashboard/CardKanban.vue";
 
     export default defineComponent({
         components: {
-          CardKanban,
+            CardKanban,
         },
 
         props: {
-            
+            boards: Array,
         },
 
         methods: {
