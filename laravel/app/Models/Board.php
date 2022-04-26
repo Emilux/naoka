@@ -26,4 +26,12 @@ class Board extends Model
         return $this->belongsTo(Team::class, 'team_id')->first();
     }
 
+    /**
+     * Get the post that owns the comment.
+     */
+    public function Column()
+    {
+        return $this->hasOne(Column::class, 'column_id')->first();
+    }
+
 }

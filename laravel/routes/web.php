@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\BoardsController;
 use App\Http\Controllers\TeamMemberController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ColumnsController;
 use App\Http\Controllers\DashboardsController;
 
 /*
@@ -31,21 +32,25 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',
 
 Route::middleware(['auth:sanctum', 'verified'])
     ->as('boards.')
+    ->prefix('boards')
     ->group(function () {
-        Route::get('/boards/{board:uuid}', [BoardsController::class, 'show'])
+        Route::get('/{board:uuid}', [BoardsController::class, 'show'])
             ->whereUuid('board')
             ->name('show');
-        Route::get('/boards/create', [BoardsController::class, 'create'])
+        Route::get('/create', [BoardsController::class, 'create'])
             ->name('create');
-        Route::get('/boards/{board:uuid}/edit', [BoardsController::class, 'edit'])
+        Route::post('/create', [BoardsController::class, 'store'])
+            ->name('store');
+        Route::post('/{board:uuid}/column', [ColumnsController::class, 'store'])
+            ->whereUuid('board')
+            ->name('column.store');
+        Route::get('/{board:uuid}/edit', [BoardsController::class, 'edit'])
             ->whereUuid('board')
             ->name('edit');
-        Route::put('/boards/{board:uuid}/edit', [BoardsController::class, 'update'])
+        Route::put('/{board:uuid}/edit', [BoardsController::class, 'update'])
             ->whereUuid('board')
             ->name('update');
-        Route::post('/boards/create', [BoardsController::class, 'store'])
-            ->name('store');
-        Route::delete('/boards/{board:uuid}/delete', [BoardsController::class, 'destroy'])
+        Route::delete('/{board:uuid}/delete', [BoardsController::class, 'destroy'])
             ->name('destroy');
     });
 
