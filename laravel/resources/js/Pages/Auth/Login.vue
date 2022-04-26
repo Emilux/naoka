@@ -93,7 +93,6 @@ import JetCheckbox from "@/Jetstream/Checkbox.vue";
 import SpanInput from "@/Jetstream/SpanInput.vue";
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 import AuthTitle from "@/Jetstream/AuthTitle.vue";
-import AuthFooter from "@/Jetstream/AuthFooter.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
@@ -107,7 +106,6 @@ export default defineComponent({
     JetValidationErrors,
     AuthTitle,
     Link,
-    AuthFooter,
   },
 
   props: {

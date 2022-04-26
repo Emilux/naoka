@@ -1,30 +1,39 @@
 <template>
     <app-layout title="Dashboard">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
-            </h2>
-        </template>
 
-        <div class="py-12">
+        <AuthTitle title="Dashboards" description="Lorem ipsum dolor ipsumeto la Qunatasse la tu connais"/>
+
+        <div class="py-4">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <welcome />
+                <div class="bg-white overflow-hidden">
+                    <ListKanbans :boards="$page.props.boards" :CollaborateUsers="$page.props.CollaborateUsers"/>
                 </div>
             </div>
         </div>
+
     </app-layout>
 </template>
 
 <script>
     import { defineComponent } from 'vue'
     import AppLayout from '@/Layouts/AppLayout.vue'
-    import Welcome from '@/Jetstream/Welcome.vue'
+    import ListKanbans from '@/components/Dashboard/ListKanbans.vue'
+    import AuthTitle from "@/Jetstream/AuthTitle.vue";
 
     export default defineComponent({
         components: {
             AppLayout,
-            Welcome,
+            ListKanbans,
+            AuthTitle,
         },
+
+        data() {
+            return {
+                boards: Array,
+                CollaborateUsers: Array,
+            }
+        }
+
     })
+
 </script>
