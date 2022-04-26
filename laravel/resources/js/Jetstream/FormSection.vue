@@ -1,6 +1,5 @@
 <template>
     <div class="">
-
         <div class="mt-5 md:mt-0">
             <form @submit.prevent="$emit('submitted')">
                 <div class="px-4 py-5 bg-white sm:p-6"
@@ -12,7 +11,6 @@
                         <slot name="actions"></slot>
                     </div>
                 </div>
-                
             </form>
         </div>
     </div>

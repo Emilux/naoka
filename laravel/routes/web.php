@@ -1,8 +1,9 @@
 <?php
 
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BoardsController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 use App\Http\Controllers\DashboardsController;
 
 /*
@@ -20,17 +21,22 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
-});
+})->middleware('guest');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', 
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',
         [DashboardsController::class, 'index'])
     ->name('dashboard');
 
+Route::middleware(['auth:sanctum', 'verified'])
+    ->as('boards.')
+    ->group(function () {
+        Route::get('/boards/{board:uuid}', [BoardsController::class, 'show'])
+            ->whereUuid('board')
+            ->name('show');
+        Route::get('/boards/create', [BoardsController::class, 'create'])
+            ->name('create');
+        Route::post('/boards/store', [BoardsController::class, 'store'])
+            ->name('store');
+    });
 
-// Remove after the merge with Emilien's branch
-Route::prefix('boards')->as('boards.')->group(function () {
-    Route::get('create', 'DashboardsController@index')->name('create');
-});

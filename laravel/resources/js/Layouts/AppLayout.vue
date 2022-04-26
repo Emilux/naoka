@@ -6,11 +6,25 @@
 
         <div class="h-screen flex flex-col overflow-hidden">
             <Navbar class="relative">
-                <Button>
-                    Create
-                    <i class="naoka-icon solidPlus ml-2"></i>
-                </Button>
+                <jet-dropdown align="right" width="48">
+                    <template #trigger>
+                        <Button color="blue">
+                            Create
+                            <i class="naoka-icon solidPlus ml-2"></i>
+                        </Button>
+                    </template>
+
+                    <template #content>
+                        <jet-dropdown-link :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
+                            Create New Team
+                        </jet-dropdown-link>
+                        <jet-dropdown-link :href="route('boards.create')">
+                            Create Board
+                        </jet-dropdown-link>
+                    </template>
+                </jet-dropdown>
             </Navbar>
+            <slot name="afterNavbar"></slot>
             <div class="overflow-auto">
                 <!-- Page Heading -->
                 <header class="bg-white" v-if="$slots.header">

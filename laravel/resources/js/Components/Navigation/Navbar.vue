@@ -1,7 +1,7 @@
 <template>
     <nav class="fixed top-0 w-full flex bg-white z-50 items-center justify-between py-6 sm:py-4 px-2.5 sm:px-12 shadow-base">
         <div class="flex items-center">
-            <Link :href="'/'" class="group">
+            <Link :href="!$page.props.user ? '/' : route('dashboard')" class="group">
                 <div class="w-36 sm:w-40">
                     <svg viewBox="0 0 116 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="group-hover:-translate-x-[1px] transition-transform" d="M31.5534 23.002V5.78093C31.5534 3.65112 28.9392 2.55578 27.4801 4.07708L18.8469 12.7181C17.935 13.6308 17.935 15.1521 18.8469 16.1258L27.4193 24.7059C28.9392 26.2272 31.5534 25.1318 31.5534 23.002Z" fill="#00ADB5"/>
@@ -84,5 +84,10 @@ export default defineComponent({
         JetDropdown,
         JetDropdownLink
     },
+    methods: {
+        logout() {
+            this.$inertia.post(route('logout'));
+        },
+    }
 })
 </script>

@@ -1,9 +1,7 @@
 <template>
     <app-layout title="Team Settings">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Team Settings
-            </h2>
+            <Title title="Team Settings" description="Edit team settings"/>
         </template>
 
         <div>
@@ -32,6 +30,7 @@
     import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
     import TeamMemberManager from '@/Pages/Teams/Partials/TeamMemberManager.vue'
     import UpdateTeamNameForm from '@/Pages/Teams/Partials/UpdateTeamNameForm.vue'
+    import Title from '@/Components/Ui/Title'
 
     export default defineComponent({
         props: [
@@ -46,6 +45,7 @@
             JetSectionBorder,
             TeamMemberManager,
             UpdateTeamNameForm,
+            Title
         },
     })
 </script>
