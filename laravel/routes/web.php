@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\BoardsController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\BoardsController;
+use App\Http\Controllers\ColumnsController;
 use App\Http\Controllers\DashboardsController;
 
 /*
@@ -30,13 +31,16 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard',
 
 Route::middleware(['auth:sanctum', 'verified'])
     ->as('boards.')
+    ->prefix('boards')
     ->group(function () {
-        Route::get('/boards/{board:uuid}', [BoardsController::class, 'show'])
+        Route::get('/{board:uuid}', [BoardsController::class, 'show'])
             ->whereUuid('board')
             ->name('show');
-        Route::get('/boards/create', [BoardsController::class, 'create'])
+        Route::get('/create', [BoardsController::class, 'create'])
             ->name('create');
-        Route::post('/boards/store', [BoardsController::class, 'store'])
+        Route::post('/store', [BoardsController::class, 'store'])
             ->name('store');
+        Route::post('/{board:uuid}/column', [ColumnsController::class, 'store'])
+            ->whereUuid('board')
+            ->name('column.store');
     });
-
