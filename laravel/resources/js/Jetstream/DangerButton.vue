@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" class="flex text-purple font-semibold rounded-xl tracking-widest disabled:opacity-25 transition p-3">
+    <button :type="type" class="flex bg-naoka-red text-white font-semibold rounded-xl disabled:opacity-25 transition p-3">
         <slot></slot>
     </button>
 </template>

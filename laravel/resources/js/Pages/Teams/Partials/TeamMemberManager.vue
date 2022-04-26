@@ -4,7 +4,7 @@
             <jet-section-border />
 
             <!-- Add Team Member -->
-            <jet-form-section @submitted="addTeamMember">
+            <jet-form-section @submitted="addTeamMember" ProfileClass="flex flex-col w-full sm:w-96 items-center m-auto">
                 <template #title>
                     Add Team Member
                 </template>
@@ -14,21 +14,25 @@
                 </template>
 
                 <template #form>
-                    <div class="col-span-6">
+                    <div class="mt-4">
                         <div class="max-w-xl text-sm text-gray-600">
                             Please provide the email address of the person you would like to add to this team.
                         </div>
                     </div>
 
                     <!-- Member Email -->
-                    <div class="col-span-6 sm:col-span-4">
-                        <jet-label for="email" value="Email" />
-                        <jet-input id="email" type="email" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
+                    <div class="mt-4 w-full">
+                        <div class="relative">
+                            <jet-input id="email" type="email" class="mt-1 block w-full pl-14" v-model="addTeamMemberForm.email" placeholder="Email" required />
+                            <SpanInput>
+                                <i class="naoka-icon SolidMail"></i>
+                            </SpanInput>
+                        </div>
                         <jet-input-error :message="addTeamMemberForm.errors.email" class="mt-2" />
                     </div>
 
                     <!-- Role -->
-                    <div class="col-span-6 lg:col-span-4" v-if="availableRoles.length > 0">
+                    <div class="mt-4" v-if="availableRoles.length > 0">
                         <jet-label for="roles" value="Role" />
                         <jet-input-error :message="addTeamMemberForm.errors.role" class="mt-2" />
 
@@ -63,9 +67,9 @@
                         Added.
                     </jet-action-message>
 
-                    <jet-button :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
+                    <Button class="mt-4" :wide="true" color="blue" :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
                         Add
-                    </jet-button>
+                    </Button>
                 </template>
             </jet-form-section>
         </div>
@@ -196,9 +200,10 @@
                     Cancel
                 </jet-secondary-button>
 
-                <jet-button class="ml-3" @click="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
+                <Button class="mt-4 ml-3" color="blue" :wide="true" @click="updateRole" 
+                    :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
                     Save
-                </jet-button>
+                </Button>
             </template>
         </jet-dialog-modal>
 
@@ -250,7 +255,7 @@
     import { defineComponent } from 'vue'
     import JetActionMessage from '@/Jetstream/ActionMessage.vue'
     import JetActionSection from '@/Jetstream/ActionSection.vue'
-    import JetButton from '@/Jetstream/Button.vue'
+    import Button from '@/components/Ui/Button.vue'
     import JetConfirmationModal from '@/Jetstream/ConfirmationModal.vue'
     import JetDangerButton from '@/Jetstream/DangerButton.vue'
     import JetDialogModal from '@/Jetstream/DialogModal.vue'
@@ -260,12 +265,13 @@
     import JetLabel from '@/Jetstream/Label.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
     import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
+    import SpanInput from '@/Jetstream/SpanInput.vue'
 
     export default defineComponent({
         components: {
             JetActionMessage,
             JetActionSection,
-            JetButton,
+            Button,
             JetConfirmationModal,
             JetDangerButton,
             JetDialogModal,
@@ -275,6 +281,7 @@
             JetLabel,
             JetSecondaryButton,
             JetSectionBorder,
+            SpanInput,
         },
 
         props: [

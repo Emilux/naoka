@@ -5,7 +5,7 @@
         </template>
 
         <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto py-4 sm:px-6 lg:px-8">
                 <update-team-name-form :team="team" :permissions="permissions" />
 
                 <team-member-manager class="mt-10 sm:mt-0"
@@ -16,7 +16,7 @@
                 <template v-if="permissions.canDeleteTeam && ! team.personal_team">
                     <jet-section-border />
 
-                    <delete-team-form class="mt-10 sm:mt-0" :team="team" />
+                    <delete-team-form class="mt-10 sm:mt-0 flex flex-col items-center" :team="team" />
                 </template>
             </div>
         </div>

@@ -28,6 +28,7 @@ class DashboardsController extends Controller
                 })
                 ->select('users.name', 'users.profile_photo_path')
                 ->get();
+
         return Inertia::render('Dashboard', [
             'boards' => $boards,
             'CollaborateUsers' => $users,
