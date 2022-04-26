@@ -15,7 +15,7 @@ class DashboardsController extends Controller
      * Get boards and collaborateur for the current team
      * @TODO add link parameter in CardKanban
      * @TODO add identifiant for a kanban in CardKanban
-     * 
+     *
      */
     public function index()
     {
@@ -28,7 +28,6 @@ class DashboardsController extends Controller
                 })
                 ->select('users.name', 'users.profile_photo_path')
                 ->get();
-        // dd($users);
         return Inertia::render('Dashboard', [
             'boards' => $boards,
             'CollaborateUsers' => $users,

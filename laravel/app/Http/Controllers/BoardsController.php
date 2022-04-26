@@ -53,9 +53,19 @@ class BoardsController extends Controller
      * @param Board $board
      * @return Response
      */
-    public function show(Board $board): Response
+    public function show(Request $request, Board $board): Response
     {
-        //@todo verify that the current user is part of the board of this board and have the right to read
+        $user = $request->user();
+
+
+        if (!$user->hasTeamPermission($user->currentTeam,'read')){
+            abort(401, 'You cannot read this board');
+        }
+
+        if (!$user->belongsToTeam($board->team())){
+            abort(401, 'You cannot read this board');
+        }
+
         return Inertia::render('Boards/Show', ['board' => $board]);
     }
 
