@@ -26,11 +26,20 @@ class Board extends Model
     }
 
     /**
-     * Get the post that owns the comment.
+     * Get all column for current boards.
      */
-    public function Column()
+    public function columns()
     {
-        return $this->hasOne(Column::class, 'column_id')->first();
+        return $this->hasMany(Column::class, 'board_id')->get();
     }
+
+    /**
+     * Get all cards for current boards.
+     */
+    public function cards()
+    {
+        return $this->hasManyThrough(Card::class, Column::class)->get();
+    }
+
 
 }
