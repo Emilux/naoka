@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateColumnsTable extends Migration
+class CreateCardTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateColumnsTable extends Migration
      */
     public function up()
     {
-        Schema::create('columns', function (Blueprint $table) {
+        Schema::create('cards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('board_id');
+            $table->foreignId('column_id');
             $table->string('name', 50);
-            $table->string('position',50);
-            $table->boolean('archive')->default(1);
+            $table->text('description');
+            $table->string('position');
+            $table->boolean('archive')->default(0);
+            $table->integer('count');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateColumnsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('columns');
+        Schema::dropIfExists('cards');
     }
 }

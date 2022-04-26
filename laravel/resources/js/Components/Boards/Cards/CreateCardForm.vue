@@ -1,7 +1,7 @@
 <template>
 
     <jet-form-section @submitted="createCard">
-    
+
         <template #form>
             <div class="w-full sm:w-3/4">
                 <jet-input placeholder="Card title" id="name" type="text" class="block w-full mt-1" v-model="form.name"/>
@@ -43,7 +43,7 @@ export default defineComponent({
             })
         }
     },
-    
+
     methods: {
         createCard() {
             this.form.post(route('boards.column.card.store', [this.$page.props.board, this.column]), {
