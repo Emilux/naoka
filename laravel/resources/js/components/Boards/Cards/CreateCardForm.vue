@@ -1,9 +1,12 @@
 <template>
-    <jet-form-section @submitted="createColumn">
+
+    <jet-form-section @submitted="createCard">
+    
         <template #form>
             <div class="w-full sm:w-3/4">
-                <jet-input placeholder="Column title" id="name" type="text" class="block w-full mt-1" v-model="form.name" autofocus />
+                <jet-input placeholder="Card title" id="name" type="text" class="block w-full mt-1" v-model="form.name"/>
                 <jet-input-error :message="form.errors.name" class="mt-2" />
+                <jet-input type="hidden" name="id" value="{{column.id}}"/>
             </div>
         </template>
 
@@ -30,6 +33,10 @@ export default defineComponent({
         JetInputError,
     },
 
+    props: {
+        column: Object,
+    },
+
     data() {
         return {
             form: this.$inertia.form({
@@ -37,11 +44,11 @@ export default defineComponent({
             })
         }
     },
-
+    
     methods: {
-        createColumn() {
-            this.form.post(route('boards.column.store', this.$page.props.board), {
-                errorBag: 'createColumn',
+        createCard() {
+            this.form.post(route('boards.column.card.store', this.$page.props.board), {
+                errorBag: 'createCard',
                 preserveScroll: true
             });
         },

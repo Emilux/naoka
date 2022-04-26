@@ -70,7 +70,11 @@ class BoardsController extends Controller
             abort(401, 'You cannot read this board');
         }
 
-        return Inertia::render('Boards/Show', ['board' => $board]);
+        $columns = $board->columns();
+
+        $cards = $board->cards();
+
+        return Inertia::render('Boards/Show', ['board' => $board, 'columns' => $columns, 'cards' => $cards]);
     }
 
     /**

@@ -28,6 +28,7 @@
     "dependencies": {
         "detect-touch-device": "^1.1.6",
         "gsap": "^3.10.3",
-        "vue-accessible-color-picker": "^4.0.0"
+        "vue-accessible-color-picker": "^4.0.0",
+        "vuedraggable": "^4.1.0"
     }
 }

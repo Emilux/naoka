@@ -29,7 +29,7 @@
             <main class="h-full relative inline-flex">
                 <LeftNavBoards/>
 
-                // Add drag'n drop
+                <ViewDragNDrop :columns="$page.props.columns" :cards="$page.props.cards"/>
 
                 <button class="absolute bottom-0 right-0 flex justify-center items-center w-12 h-12 m-8 sm:w-16 sm:h-16 sm:m-12 text-3xl bg-naoka-red text-white rounded-full">
                     <i class="naoka-icon solidTrash"></i>
@@ -44,11 +44,21 @@
 import { defineComponent } from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import LeftNavBoards from '@/components/Navigation/Boards/LeftNavBoards.vue'
+import ViewDragNDrop from '@/components/Boards/Column/ViewDragNDrop.vue'
+
 
 export default defineComponent({
     components: {
         AppLayout,
         LeftNavBoards,
+        ViewDragNDrop,
     },
+
+    data() {
+        return {
+            columns: Object,
+            cards: Object,
+        }
+    }
 })
 </script>
