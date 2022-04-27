@@ -46,7 +46,8 @@ Route::middleware(['auth:sanctum', 'verified'])
             ->whereUuid('board')
             ->name('column.store');
 
-        Route::post('/{board:uuid}/column/card', [CardsController::class, 'store'])
+        Route::post('/{board:uuid}/column/{column}/card', [CardsController::class, 'store'])
             ->whereUuid('board')
+            ->whereNumber('column')
             ->name('column.card.store');
     });

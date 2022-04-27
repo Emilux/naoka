@@ -68,7 +68,13 @@ class BoardsController extends Controller
 
         $columns = $board->columns();
 
+
         $cards = $board->cards();
+
+        
+
+        dd($cards);
+
 
         return Inertia::render('Boards/Show', ['board' => $board, 'columns' => $columns, 'cards' => $cards]);
     }
