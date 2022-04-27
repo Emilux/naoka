@@ -23,7 +23,7 @@ class Column extends Model
      */
     public function board()
     {
-        return $this->belongsTo(Board::class, 'board_id')->get();
+        return $this->belongsTo(Board::class, 'board_id');
     }
 
     /**
@@ -31,6 +31,6 @@ class Column extends Model
      */
     public function cards()
     {
-        return $this->hasMany(Card::class, 'card_id')->get();
+        return $this->hasMany(Card::class, 'column_id');
     }
 }

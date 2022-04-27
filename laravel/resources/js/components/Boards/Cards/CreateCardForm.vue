@@ -3,7 +3,6 @@
     <jet-form-section @submitted="createCard">
     
         <template #form>
-        {{column}}
             <div class="w-full sm:w-3/4">
                 <jet-input placeholder="Card title" id="name" type="text" class="block w-full mt-1" v-model="form.name"/>
                 <jet-input-error :message="form.errors.name" class="mt-2" />

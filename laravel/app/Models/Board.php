@@ -31,7 +31,7 @@ class Board extends Model
      */
     public function columns()
     {
-        return $this->hasMany(Column::class, 'board_id')->get();
+        return $this->hasMany(Column::class, 'board_id');
     }
 
     /**
@@ -39,8 +39,6 @@ class Board extends Model
      */
     public function cards()
     {
-        return $this->hasManyThrough(Card::class, Column::class)->toSql();
+        return $this->hasManyThrough(Card::class, Column::class)->get();
     }
-
-
 }

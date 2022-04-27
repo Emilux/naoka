@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
+use App\Models\Card;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -41,9 +43,7 @@ class BoardsController extends Controller
 
         $user = $request->user();
 
-        if (
-            !$user->hasTeamPermission($user->currentTeam,'create')
-        ){
+        if (!$user->hasTeamPermission($user->currentTeam, 'create')) {
             abort(401, 'You cannot create board in this team');
         }
 
@@ -66,21 +66,11 @@ class BoardsController extends Controller
             abort(401, 'You cannot read this board');
         }
 
-        if (!$user->belongsToTeam($board->team())){
+        if (!$user->belongsToTeam($board->team())) {
             abort(401, 'You cannot read this board');
         }
 
-        $columns = $board->columns();
-
-
-        $cards = $board->cards();
-
-        
-
-        dd($cards);
-
-
-        return Inertia::render('Boards/Show', ['board' => $board, 'columns' => $columns, 'cards' => $cards]);
+        return Inertia::render('Boards/Show', ['board' => $board, 'columns' => $board->columns()->with('cards')->get()]);
     }
 
     /**

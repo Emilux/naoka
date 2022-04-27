@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <ViewCards :cards="cards"/>
+                <ViewCards :cards="element.cards"/>
                 
                 <CreateCard :column="element"/>
             </div>
