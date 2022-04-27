@@ -11,6 +11,7 @@ class Column extends Model
     use HasFactory;
     use SortableTrait;
 
+
     protected $fillable = [
         'name',
         'position',
@@ -31,6 +32,6 @@ class Column extends Model
      */
     public function cards()
     {
-        return $this->hasMany(Card::class, 'column_id');
+        return $this->hasMany(Card::class, 'column_id')->sorted();
     }
 }

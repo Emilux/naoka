@@ -55,6 +55,7 @@
                            <CardKanban :board="board"/>
                            </div>
                        </template>
+                        
                         <div class="mb-12 w-full sm:w-1/2 lg:w-1/3">
                             <CardAdd/>
                         </div>
@@ -69,7 +70,7 @@
 <script>
     import { defineComponent } from 'vue'
     import CardKanban from "@/components/Dashboard/CardKanban.vue";
-    import CardAdd from "@/components/Dashboard/CardAdd.vue";
+    import CardAdd from "@/Components/Dashboard/CardAdd.vue";
     import JetNavLink from '@/Jetstream/NavLink.vue'
     import Button from '@/components/Ui/Button'
 

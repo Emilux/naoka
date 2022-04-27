@@ -70,6 +70,8 @@ class BoardsController extends Controller
             abort(401, 'You cannot read this board');
         }
 
+        // dd($board->columns()->with('cards')->sorted()->get());
+
         return Inertia::render('Boards/Show', ['board' => $board, 'columns' => $board->columns()->with('cards')->get()]);
     }
 

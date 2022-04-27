@@ -31,7 +31,7 @@ class Board extends Model
      */
     public function columns()
     {
-        return $this->hasMany(Column::class, 'board_id');
+        return $this->hasMany(Column::class, 'board_id')->sorted();
     }
 
     /**

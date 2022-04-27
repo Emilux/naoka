@@ -15,7 +15,7 @@
                     <div v-bind:onclick="log" class="hover:bg-white-hover p-1 w-full">{{ element.name }}</div>
                         <div class="text-xl flex items-center">
                         <i v-bind:onclick="log" class="naoka-icon solidPlus hover:bg-white-hover p-1"></i>
-                        <i v-bind:onclick="log" class="naoka-icon SolidOptionDot hover:bg-white-hover p-1"></i>
+                        <DeleteColumn :column="element"/>
                     </div>
                 </div>
 
