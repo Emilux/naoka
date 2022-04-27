@@ -14,7 +14,7 @@
             </div>
 
             <div class="mt-5">
-                <jet-danger-button @click="confirmTeamDeletion">
+                <jet-danger-button class="bg-naoka-red text-white p-2" @click="confirmTeamDeletion">
                     Delete Team
                 </jet-danger-button>
             </div>
