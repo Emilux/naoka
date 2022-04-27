@@ -31,10 +31,6 @@
 
                 <ViewDragNDrop :columns="$page.props.columns" :cards="$page.props.cards"/>
 
-                <button class="absolute bottom-0 right-0 flex justify-center items-center w-12 h-12 m-8 sm:w-16 sm:h-16 sm:m-12 text-3xl bg-naoka-red text-white rounded-full">
-                    <i class="naoka-icon solidTrash"></i>
-                </button>
-
             </main>
         </template>
     </app-layout>

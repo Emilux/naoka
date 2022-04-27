@@ -18,7 +18,7 @@ class CreateColumnsTable extends Migration
             $table->foreignId('board_id');
             $table->string('name', 50);
             $table->string('position');
-            $table->boolean('archive')->default(0);
+            $table->boolean('archive')->default(1);
             $table->timestamps();
         });
     }
