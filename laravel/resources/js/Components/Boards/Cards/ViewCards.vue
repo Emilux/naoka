@@ -13,7 +13,7 @@
             <div class=" relative p-2.5 shadow-mini rounded-2xl mt-4 cursor-pointer text-naoka-purple font-raleway border-naoka-grey text-sm border hover:bg-white-hover transition-colors">
                 
                 <div class="absolute right-0 top-0 text-lg">
-                    <button class="px-1 py-1.5"><i class="naoka-icon SolidOptionDot"></i></button>
+                    <DeleteCard :column="column" :card="element"/>
                 </div>
             
                 <div v-if="element.tag" class="flex flex-wrap text-xs">
@@ -41,14 +41,17 @@
 <script>
 import { defineComponent } from 'vue'
 import draggable from 'vuedraggable'
+import DeleteCard from '@/components/Boards/Cards/DeleteCard.vue'
 
 export default {
     components: {
         draggable,
+        DeleteCard,
     },
 
     props: {
         cards: Object,
+        column: Object
     },
 
     data() {
@@ -56,10 +59,6 @@ export default {
             hasScroll: true,
             drag: true,
         }
-    },
-    
-    mounted() {
-        console.log(this.cards);
     },
 
     methods:{

@@ -15,7 +15,8 @@ class Column extends Model
     protected $fillable = [
         'name',
         'position',
-        'board_id'
+        'board_id',
+        'archive',
     ];
 
 
@@ -32,6 +33,6 @@ class Column extends Model
      */
     public function cards()
     {
-        return $this->hasMany(Card::class, 'column_id')->sorted();
+        return $this->hasMany(Card::class, 'column_id')->where('archive', '=', 1)->sorted();
     }
 }

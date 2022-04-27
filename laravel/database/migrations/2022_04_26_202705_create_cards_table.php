@@ -19,7 +19,7 @@ class CreateCardsTable extends Migration
             $table->string('name', 50);
             $table->text('description')->nullable();
             $table->string('position');
-            $table->boolean('archive')->default(0);
+            $table->boolean('archive')->default(1);
             $table->integer('count');
             $table->timestamps();
         });

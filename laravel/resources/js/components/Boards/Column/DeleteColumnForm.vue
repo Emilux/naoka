@@ -1,17 +1,12 @@
 <template>
-
-    <jet-form-section @submitted="createCard">
-    
+    <jet-form-section @submitted="deleteColumn">
         <template #form>
-            <div class="w-full sm:w-3/4">
-                <jet-input placeholder="Card title" id="name" type="text" class="block w-full mt-1" v-model="form.name"/>
-                <jet-input-error :message="form.errors.name" class="mt-2" />
-            </div>
+            Are you sur do you wan't delete this column ?
         </template>
 
         <template #actions>
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Create
+            <jet-button class="bg-naoka-red" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Delete
             </jet-button>
         </template>
     </jet-form-section>
@@ -32,10 +27,6 @@ export default defineComponent({
         JetInputError,
     },
 
-    props: {
-        column: Object,
-    },
-
     data() {
         return {
             form: this.$inertia.form({
@@ -43,11 +34,16 @@ export default defineComponent({
             })
         }
     },
-    
+
+    props: {
+        column: Object
+    },
+
     methods: {
-        createCard() {
-            this.form.post(route('boards.column.card.store', [this.$page.props.board, this.column]), {
-                errorBag: 'createCard',
+        deleteColumn() {
+            console.log('Ok')
+            this.form.delete(route('boards.column.destroy', [this.$page.props.board, this.column]), {
+                errorBag: 'deleteColumn',
                 preserveScroll: true,
                 onSuccess: () => this.$emit('close', closeModal())
             });

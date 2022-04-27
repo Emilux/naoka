@@ -9,7 +9,7 @@
         </template>
 
         <template #content>
-            <createColumnForm/>
+            <createColumnForm @close="closeModal"/>
         </template>
 
         <template #footer>
@@ -39,7 +39,6 @@
                 AddColumnModal: false,
 
                 form: this.$inertia.form({
-                    password: '',
                 })
             }
         },
@@ -47,13 +46,10 @@
         methods: {
             AddColumn() {
                 this.AddColumnModal = true;
-
-                setTimeout(() => this.$refs.password.focus(), 250)
             },
 
             closeModal() {
                 this.AddColumnModal = false
-
                 this.form.reset()
             },
         },

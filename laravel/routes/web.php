@@ -48,15 +48,28 @@ Route::middleware(['auth:sanctum', 'verified'])
             ->name('update');
         Route::post('/create', [BoardsController::class, 'store'])
             ->name('store');
+        Route::delete('/{board:uuid}/delete', [BoardsController::class, 'destroy'])
+            ->name('destroy');
+
+        //Column route
         Route::post('/{board:uuid}/column', [ColumnsController::class, 'store'])
             ->whereUuid('board')
             ->name('column.store');
-        Route::delete('/{board:uuid}/delete', [BoardsController::class, 'destroy'])
-            ->name('destroy');
+        Route::delete('/{board:uuid}/column/{column}', [ColumnsController::class, 'destroy'])
+            ->whereUuid('board')
+            ->whereNumber('column')
+            ->name('column.destroy');
+
+        //Card route
         Route::post('/{board:uuid}/column/{column}/card', [CardsController::class, 'store'])
             ->whereUuid('board')
             ->whereNumber('column')
             ->name('column.card.store');
+        Route::delete('/{board:uuid}/column/{column}/card/{card}', [CardsController::class, 'destroy'])
+            ->whereUuid('board')
+            ->whereNumber('column')
+            ->whereNumber('card')
+            ->name('column.card.destroy');
     });
 
 Route::middleware(['auth:sanctum', 'verified'])->put('/teams/{team}/members/{user}/updatecolor',

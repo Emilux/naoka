@@ -14,14 +14,14 @@
                 <div class="handle p-3 text-sm text-naoka-purple font-raleway font-semibold cursor-pointer flex justify-between items-center">
                     <div v-bind:onclick="log" class="hover:bg-white-hover p-1 w-full">{{ element.name }}</div>
                         <div class="text-xl flex items-center">
-                        <i v-bind:onclick="log" class="naoka-icon solidPlus hover:bg-white-hover p-1"></i>
+                        <CreateCard :column="element" addClass="p-1"/>
                         <DeleteColumn :column="element"/>
                     </div>
                 </div>
 
-                <ViewCards :cards="element.cards"/>
+                <ViewCards :column="element" :cards="element.cards"/>
                 
-                <CreateCard :column="element"/>
+                <CreateCard :column="element" text='Add new card...' addClass="py-4 px-4"/>
             </div>
         </template>
     </draggable>
@@ -32,12 +32,14 @@ import { defineComponent } from 'vue'
 import draggable from 'vuedraggable'
 import ViewCards from '@/components/Boards/Cards/ViewCards.vue'
 import CreateCard from '@/components/Boards/Cards/CreateCard.vue'
+import DeleteColumn from '@/components/Boards/Column/DeleteColumn.vue'
 
 export default {
     components: {
         draggable,
         ViewCards,
         CreateCard,
+        DeleteColumn,
     },
 
     props: {

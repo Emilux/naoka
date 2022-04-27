@@ -31,7 +31,7 @@ class Board extends Model
      */
     public function columns()
     {
-        return $this->hasMany(Column::class, 'board_id')->sorted();
+        return $this->hasMany(Column::class, 'board_id')->where('archive', '=', 1)->sorted();
     }
 
     /**

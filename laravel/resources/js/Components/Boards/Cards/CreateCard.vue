@@ -1,7 +1,7 @@
 <template>
-    <button  @click="AddCard" class="hover:bg-white-hover py-4 px-4 text-sm text-naoka-purple font-raleway cursor-pointer flex items-center">
+    <button  @click="AddCard" :class="addClass" class="hover:bg-white-hover text-sm text-naoka-purple font-raleway cursor-pointer flex items-center">
         <i class="naoka-icon solidPlus mr-4"></i>
-        Add new card...
+        {{ text }}
     </button>
 
     <jet-dialog-modal :show="AddCardModal" @close="closeModal">
@@ -10,7 +10,7 @@
         </template>
 
         <template #content>
-            <CreateCardForm :column="column"/>
+            <CreateCardForm :column="column" @close="closeModal"/>
         </template>
 
         <template #footer>
@@ -36,7 +36,9 @@
         },
 
         props: {
-            column: Object
+            column: Object,
+            text: String,
+            addClass: String,
         },
 
         data() {
@@ -52,14 +54,10 @@
         methods: {
             AddCard() {
                 this.AddCardModal = true;
-
-                setTimeout(() => this.$refs.password.focus(), 250)
             },
 
             closeModal() {
                 this.AddCardModal = false
-
-                this.form.reset()
             },
         },
     })

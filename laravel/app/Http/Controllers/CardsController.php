@@ -6,6 +6,7 @@ use App\Models\Card;
 use App\Models\Board;
 use App\Models\Column;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 
 class CardsController extends Controller
@@ -30,11 +31,38 @@ class CardsController extends Controller
 
         $number = $board->cards()->count();
 
+        $number = ($number == null) ? $number = 0 : $number;
+
         Card::create([
             'name' => $validated['name'],
             'column_id' => $column->id,
             'count' => $number++,
             'description' => ''
+        ]);
+
+        return Redirect::route('boards.show', ['board' => $board->uuid], 303);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @param Board $board
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request, Board $board, Column $column, Card $card): RedirectResponse
+    {
+        $user = $request->user();
+
+        if (
+            !$user->hasTeamPermission($user->currentTeam, 'delete') ||
+            !$user->belongsToTeam($board->team())
+        ) {
+            abort(401, 'You cannot delete this card');
+        }
+
+        $card->update([
+            'archive' => false
         ]);
 
         return Redirect::route('boards.show', ['board' => $board->uuid], 303);
