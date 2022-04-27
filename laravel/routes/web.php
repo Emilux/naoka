@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\BoardsController;
+use App\Http\Controllers\TeamMemberController;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -39,15 +43,25 @@ Route::middleware(['auth:sanctum', 'verified'])
             ->name('show');
         Route::get('/create', [BoardsController::class, 'create'])
             ->name('create');
-        Route::post('/store', [BoardsController::class, 'store'])
+        Route::get('/{board:uuid}/edit', [BoardsController::class, 'edit'])
+            ->whereUuid('board')
+            ->name('edit');
+        Route::put('/{board:uuid}/edit', [BoardsController::class, 'update'])
+            ->whereUuid('board')
+            ->name('update');
+        Route::post('/create', [BoardsController::class, 'store'])
             ->name('store');
-            
         Route::post('/{board:uuid}/column', [ColumnsController::class, 'store'])
             ->whereUuid('board')
             ->name('column.store');
-
+        Route::delete('/{board:uuid}/delete', [BoardsController::class, 'destroy'])
+            ->name('destroy');
         Route::post('/{board:uuid}/column/{column}/card', [CardsController::class, 'store'])
             ->whereUuid('board')
             ->whereNumber('column')
             ->name('column.card.store');
     });
+
+Route::middleware(['auth:sanctum', 'verified'])->put('/teams/{team}/members/{user}/updatecolor',
+    [TeamMemberController::class, 'updateColor'])
+    ->name('team-member.updatecolor');

@@ -12,4 +12,13 @@ class Membership extends JetstreamMembership
      * @var bool
      */
     public $incrementing = true;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'color',
+    ];
 }

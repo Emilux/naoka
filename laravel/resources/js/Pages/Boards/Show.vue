@@ -8,7 +8,7 @@
                         <span>Back</span>
                     </a>
                     <span class="ml-8 text-white font-raleway font-semibold text-lg">{{$page.props.board.name}}</span>
-                    <span class="mx-3.5 text-white font-raleway text-lg">#NK</span>
+                    <span class="mx-3.5 text-white font-raleway text-lg uppercase">#{{$page.props.board.identifier}}</span>
                 </div>
                 <div class="flex items-center">
                     <div class="flex items-center hidden md:flex">
