@@ -23,6 +23,7 @@ module.exports = {
             serif: ['Red Hat Text'],
         },
         colors: {
+            transparent:"transparent",
             "naoka-blue": {
                 "DEFAULT":"#00ADB5",
                 "hover":"#009BA3"

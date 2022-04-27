@@ -1,5 +1,5 @@
 <template>
-    <nav class="fixed top-0 w-full flex bg-white z-50 items-center justify-between py-6 sm:py-4 px-2.5 sm:px-12 shadow-base">
+    <nav :class="{'shadow-base':!logoOnly, 'sm:bg-transparent':logoOnly}" class="fixed bg-white top-0 w-full flex z-50 items-center justify-between py-6 sm:py-4 px-2.5 sm:px-12">
         <div class="flex items-center">
             <Link :href="!$page.props.user ? '/' : route('dashboard')" class="group">
                 <div class="w-36 sm:w-40">
@@ -15,24 +15,24 @@
                     </svg>
                 </div>
             </Link>
-            <template v-if="$page.props.user">
+            <template v-if="$page.props.user && !logoOnly">
                 <Link class="ml-5 sm:ml-8 text-naoka-purple flex items-center text-lg" :href="route('dashboard')">
                     <i class="naoka-icon SolidDashboard sm:mr-4 text-3xl"></i>
                     <div class="hidden sm:block">Dashboard</div>
                 </Link>
             </template>
         </div>
+        <template v-if="!logoOnly">
+            <div class="flex items-center">
+                <slot/>
+                <div class="rounded-full ml-4 sm:ml-8" v-if="$page.props.user">
+                    <jet-dropdown align="right" width="48">
+                        <template #trigger>
+                            <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
+                            </button>
 
-        <div class="flex items-center">
-            <slot/>
-            <div class="rounded-full ml-4 sm:ml-8" v-if="$page.props.user">
-                <jet-dropdown align="right" width="48">
-                    <template #trigger>
-                        <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                            <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
-                        </button>
-
-                        <span v-else class="inline-flex rounded-md">
+                            <span v-else class="inline-flex rounded-md">
                             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
                                 {{ $page.props.user.name }}
 
@@ -41,34 +41,36 @@
                                 </svg>
                             </button>
                         </span>
-                    </template>
+                        </template>
 
-                    <template #content>
-                        <!-- Account Management -->
-                        <div class="block px-4 py-2 text-xs text-gray-400">
-                            Manage Account
-                        </div>
+                        <template #content>
+                            <!-- Account Management -->
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                Manage Account
+                            </div>
 
-                        <jet-dropdown-link :href="route('profile.show')">
-                            Profile
-                        </jet-dropdown-link>
-
-                        <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
-                            API Tokens
-                        </jet-dropdown-link>
-
-                        <div class="border-t border-gray-100"></div>
-
-                        <!-- Authentication -->
-                        <form @submit.prevent="logout">
-                            <jet-dropdown-link as="button">
-                                Log Out
+                            <jet-dropdown-link :href="route('profile.show')">
+                                Profile
                             </jet-dropdown-link>
-                        </form>
-                    </template>
-                </jet-dropdown>
+
+                            <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
+                                API Tokens
+                            </jet-dropdown-link>
+
+                            <div class="border-t border-gray-100"></div>
+
+                            <!-- Authentication -->
+                            <form @submit.prevent="logout">
+                                <jet-dropdown-link as="button">
+                                    Log Out
+                                </jet-dropdown-link>
+                            </form>
+                        </template>
+                    </jet-dropdown>
+                </div>
             </div>
-        </div>
+        </template>
+
     </nav>
 </template>
 
@@ -83,6 +85,9 @@ export default defineComponent({
         Link,
         JetDropdown,
         JetDropdownLink
+    },
+    props: {
+        logoOnly: Boolean
     },
     methods: {
         logout() {

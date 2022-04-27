@@ -1,6 +1,5 @@
 <template>
   <Head title="Log in" />
-
   <jet-authentication-card>
 
     <AuthTitle title="Sign In" description="Lorem ipsum dolor ipsumeto la Qunatasse la tu connais"/>
@@ -11,7 +10,7 @@
       {{ status }}
     </div>
 
-    <form @submit.prevent="submit" class="px-12">
+    <form @submit.prevent="submit" class="sm:px-12">
       <div class="relative">
         <jet-input
           id="email"
@@ -72,7 +71,7 @@
       </div>
     </form>
 
-    <div class="mt-6 flex justify-center text-sm text-purple ">Don't have an account ?
+    <div class="mt-6 flex justify-center text-sm text-purple ">Don't have an account ?&nbsp;
       <Link
         :href="route('register')"
         class="underline font-medium"
@@ -123,16 +122,38 @@ export default defineComponent({
     };
   },
 
+    beforeMount() {
+        document.getElementById('captchaStyle').innerHTML="";
+    },
+
+    beforeUnmount() {
+        document.getElementById('captchaStyle').innerHTML=".grecaptcha-badge { visibility: hidden !important; }";
+    },
+
   methods: {
     submit() {
-      this.form
-        .transform((data) => ({
-          ...data,
-          remember: this.form.remember ? "on" : "",
-        }))
-        .post(this.route("login"), {
-          onFinish: () => this.form.reset("password"),
-        });
+        const submitForm = (token) => {
+            this.form.recaptcha_token = token;
+            this.form
+                .transform((data) => ({
+                    ...data,
+                    recaptcha_token:token,
+                    remember: this.form.remember ? "on" : "",
+                }))
+                .post(this.route("login"), {
+                    onFinish: () => this.form.reset("password"),
+                });
+        }
+
+        grecaptcha.ready(function() {
+            grecaptcha
+                .execute(process.env.MIX_CAPTCHA_SITE_KEY, { action: "submit" })
+                .then(function (token) {
+                    submitForm(token);
+                });
+        })
+
+
     },
   },
 });

@@ -3,7 +3,7 @@
 
     <jet-authentication-card>
 
-        <AuthTitle title="Forgotten password"/>
+        <Title title="Forgotten password"/>
 
         <div class="mb-4 text-sm text-purple">
             Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
@@ -20,7 +20,7 @@
                 <jet-input
                 id="email" type="email" class="mt-1 block w-full pl-13" v-model="form.email" placeholder="Email" required autofocus/>
                 <SpanInput>
-                    <path class="fill-purple" fill-rule="evenodd" clip-rule="evenodd" d="M25 0H3L13.0412 5.4854C13.6387 5.81183 14.3613 5.81183 14.9588 5.4854L25 0ZM0 0V14.3333C0 15.4379 0.895431 16.3333 2 16.3333H26C27.1046 16.3333 28 15.4379 28 14.3333V0L15.0077 7.57882C14.385 7.94207 13.615 7.94207 12.9923 7.57882L0 0Z" fill="black"/>
+                    <i class="naoka-icon SolidMail"></i>
                 </SpanInput>
             </div>
 
@@ -30,7 +30,7 @@
                 </jet-button>
             </div>
 
-            <div class="mt-4 flex justify-center text-sm text-purple">Have you changed your mind ? 
+            <div class="mt-4 flex justify-center text-sm text-purple">Have you changed your mind ?
                 <Link
                     :href="route('login')"
                     class="underline font-medium"
@@ -40,9 +40,6 @@
             </div>
         </form>
     </jet-authentication-card>
-
-    <AuthFooter/>
-
 </template>
 
 <script>
@@ -57,6 +54,7 @@
     import SpanInput from '@/Jetstream/SpanInput.vue'
     import AuthTitle from '@/Jetstream/AuthTitle.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
+    import Title from '@/components/Ui/Title.vue'
 
     export default defineComponent({
         components: {
@@ -70,6 +68,7 @@
             AuthFooter,
             SpanInput,
             AuthTitle,
+            Title,
             Link,
         },
 
