@@ -1,7 +1,7 @@
 <template>
     <app-layout title="Profile">
         <template #header>
-            <AuthTitle title="Profile" description="Lorem ipsum dolor ipsumeto la Qunatasse la tu connais"/>
+            <AuthTitle title="Profile" description="Edit your profile information"/>
         </template>
 
         <div class="xl:container">
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="flex justify-between">
-                    
+
                     <BtnLogOut/>
                     <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
                         <delete-user-form class="mt-10 sm:mt-0" />
