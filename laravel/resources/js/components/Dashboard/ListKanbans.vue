@@ -17,16 +17,16 @@
                         </Button>
                     </div>
                         <div class="flex items-center justify-between mt-4 flex-wrap">
-                            <template v-if="CollaborateUsers && typeof CollaborateUsers['0'] !== 'undefined'" >
+                            <template v-if="CollaborateUsers && CollaborateUsers.length > 0" >
                             <div class="flex items-center">
-                                <div class="bg-naoka-red -mr-4 w-8 h-8 rounded-full"></div>
-                                <div class="bg-naoka-yellow -mr-4 w-8 h-8 rounded-full"></div>
-                                <div class="bg-naoka-blue -mr-4 w-8 h-8 rounded-full"></div>
+                                <template v-for="user in CollaborateUsers">
+                                    <img class="w-8 h-8 -mr-4 rounded-full border border-2 object-cover" :style="{borderColor:user.membership.color}" :src="user.profile_photo_url" :alt="user.name" />
+                                </template>
                                 <button class="show-participant relative bg-naoka-purple text-white w-8 h-8 rounded-full flex justify-center items-center transition-colors hover:bg-naoka-purple-hover">
                                     <i class="naoka-icon SolidOptionDotHorizontal text-3xl"></i>
                                     <div class="show-participant-hidden bg-black text-white rounded-md w-40 p-1 m-8 absolute z-10 bottom-[unset] left-1/2 text-center">
                                         <template v-for="user in CollaborateUsers">
-                                            <p class="text-sm"> {{ user.name }} </p>
+                                            <p class="text-sm flex items-center justify-center"> {{ user.name }} <span class="w-2 h-2 block ml-2" :style="{backgroundColor:user.membership.color}"></span> </p>
                                         </template>
                                     </div>
                                 </button>
@@ -80,7 +80,9 @@
             JetNavLink,
             Button,
         },
-
+        mounted() {
+            console.log(this.CollaborateUsers)
+        },
         props: {
             boards: Object,
             CollaborateUsers: Object,
