@@ -55,8 +55,9 @@ Route::middleware(['auth:sanctum', 'verified'])
         Route::delete('/{board:uuid}/delete', [BoardsController::class, 'destroy'])
             ->name('destroy');
 
-        Route::post('/{board:uuid}/column/card', [CardsController::class, 'store'])
+        Route::post('/{board:uuid}/column/{column}/card', [CardsController::class, 'store'])
             ->whereUuid('board')
+            ->whereNumber('column')
             ->name('column.card.store');
     });
 

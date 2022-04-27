@@ -23,11 +23,11 @@ class Column extends Model
      */
     public function board()
     {
-        return $this->belongsTo(Board::class, 'board_id')->toSql();
+        return $this->belongsTo(Board::class, 'board_id')->get();
     }
 
     /**
-     * Get the post that owns the comment.
+     * Get the card that owns the comment.
      */
     public function cards()
     {

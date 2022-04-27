@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateColumnTable extends Migration
+class CreateBoardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateColumnTable extends Migration
      */
     public function up()
     {
-        Schema::create('columns', function (Blueprint $table) {
+        Schema::create('boards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('board_id');
             $table->string('name', 50);
-            $table->string('position');
-            $table->boolean('archive')->default(0);
+            $table->uuid('uuid')->unique();
+            $table->string('identifier', 5);
+            $table->foreignId('team_id');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateColumnTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('columns');
+        Schema::dropIfExists('boards');
     }
 }
