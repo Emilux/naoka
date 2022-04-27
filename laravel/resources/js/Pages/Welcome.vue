@@ -4,14 +4,14 @@
     <Head title="Home" />
     <Navbar>
         <template v-if="canLogin && !$page.props.user">
-            <NavLink class="mx-8" :href="route('register')" >Register</NavLink>
+            <NavLink class="mx-8 hidden sm:block" :href="route('register')" >Register</NavLink>
             <NavButton :href="route('login')">Sign In</NavButton>
         </template>
     </Navbar>
-    <main class="mt-44 md:mt-56 mb-28">
+    <main class="mt-44 md:mt-56 mb-6">
         <Hero linkColor="blue" linkHref="#puddle" :showLink="canLogin">
             <template v-slot:subtitle>
-                My subtitle
+                Welcome to Naoka
             </template>
             <template v-slot:title>
                 Work with kanban board

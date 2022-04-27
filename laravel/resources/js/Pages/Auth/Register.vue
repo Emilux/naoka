@@ -7,7 +7,7 @@
 
         <jet-validation-errors class="mb-4" />
 
-        <form @submit.prevent="submit" class="px-12">
+        <form @submit.prevent="submit" class="sm:px-12">
             <div class="relative">
                 <jet-input id="name" type="text" class="mt-1 block w-full pl-14" placeholder="Display Name" v-model="form.name" required autofocus autocomplete="name" />
                 <SpanInput>
@@ -52,7 +52,7 @@
                 </jet-button>
             </div>
 
-            <div class="mt-4 flex justify-center text-sm text-purple ">Already have an account ?
+            <div class="mt-4 flex justify-center text-sm text-purple ">Already have an account ?&nbsp;
                 <Link
                     :href="route('login')"
                     class="underline font-medium"
@@ -93,6 +93,13 @@
             SpanInput,
             AuthTitle,
         },
+        beforeMount() {
+            document.getElementById('captchaStyle').innerHTML="";
+        },
+
+        beforeUnmount() {
+            document.getElementById('captchaStyle').innerHTML=".grecaptcha-badge { visibility: hidden !important; }";
+        },
 
         data() {
             return {
@@ -101,15 +108,29 @@
                     email: '',
                     password: '',
                     terms: false,
+                    recaptcha_token: '',
                 })
             }
         },
 
         methods: {
             submit() {
-                this.form.post(this.route('register'), {
-                    onFinish: () => this.form.reset('password'),
+                const submitForm = (token) => {
+                    this.form.recaptcha_token = token;
+                    this.form.post(this.route('register'), {
+                        onFinish: () => this.form.reset('password'),
+                    })
+                }
+
+                grecaptcha.ready(function() {
+                    grecaptcha
+                        .execute(process.env.MIX_CAPTCHA_SITE_KEY, { action: "submit" })
+                        .then(function (token) {
+                            submitForm(token);
+                        });
                 })
+
+
             }
         }
     })
