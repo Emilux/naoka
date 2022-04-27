@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use AlexCrawford\Sortable\SortableTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Card extends Model
 {
@@ -25,7 +26,7 @@ class Card extends Model
      */
     public function column()
     {
-        return $this->belongsTo(Column::class, 'board_id')->get();
+        return $this->belongsTo(Column::class, 'board_id');
     }
 
 
