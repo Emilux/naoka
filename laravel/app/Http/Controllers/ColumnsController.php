@@ -12,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 class ColumnsController extends Controller
 {
     /**
-     * Store a new created column and redirect the user to the created board using his Uuid.
+     * Store a new created column and redirect the user to the current board using his Uuid.
      *
      * @param Request $request
      * @param Board $board

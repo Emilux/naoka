@@ -22,11 +22,11 @@ class Card extends Model
     ];
 
     /**
-     * 
+     * Get the column that for current card.
      */
     public function column()
     {
-        return $this->belongsTo(Column::class, 'board_id');
+        return $this->belongsTo(Column::class, 'column_id');
     }
 
 

@@ -21,7 +21,7 @@ class Column extends Model
 
 
     /**
-     * Get the post that owns the comment.
+     * Get the board that for current column.
      */
     public function board()
     {
@@ -29,7 +29,7 @@ class Column extends Model
     }
 
     /**
-     * Get the card that owns the comment.
+     * Get all card that for current column.
      */
     public function cards()
     {

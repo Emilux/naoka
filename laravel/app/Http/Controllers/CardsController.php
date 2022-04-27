@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\Redirect;
 class CardsController extends Controller
 {
     /**
-     * Store a new created board and redirect the user to the created board using his Uuid.
+     * Store a new created cards and redirect the user to the current board his Uuid.
      *
      * @param Request $request
+     * @param Board $board
+     * @param Column $column
      * @return RedirectResponse
      */
     public function store(Request $request, Board $board, Column $column)
@@ -48,6 +50,8 @@ class CardsController extends Controller
      *
      * @param Request $request
      * @param Board $board
+     * @param Column $column
+     * @param Card $card
      * @return RedirectResponse
      */
     public function destroy(Request $request, Board $board, Column $column, Card $card): RedirectResponse

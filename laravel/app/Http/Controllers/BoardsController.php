@@ -16,7 +16,8 @@ class BoardsController extends Controller
 
     /**
      * Show the form for creating a new Board.
-     *
+     * 
+     * @param Request $request
      * @return Response
      */
     public function create(Request $request)
@@ -54,7 +55,8 @@ class BoardsController extends Controller
 
     /**
      * Display the board using his Uuid.
-     *
+     * 
+     * @param Request $request
      * @param Board $board
      * @return Response
      */
@@ -77,7 +79,7 @@ class BoardsController extends Controller
 
     /**
      * Show the form for editing a board.
-     *
+     * 
      * @param Request $request
      * @param Board $board
      * @return Response
@@ -151,7 +153,8 @@ class BoardsController extends Controller
 
     /**
      * Generate an 1 or 2 character(s) long identifier from a string
-     * @param $string
+     * 
+     * @param String $string
      * @return string
      */
     private function generateIdentifier($string): string
