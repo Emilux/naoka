@@ -60,6 +60,10 @@ export default {
             drag: true,
         }
     },
+    
+    mounted() {
+        console.log(this.cards);
+    },
 
     methods:{
         log: function () {

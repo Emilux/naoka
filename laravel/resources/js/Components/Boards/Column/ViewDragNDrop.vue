@@ -20,7 +20,7 @@
                 </div>
 
                 <ViewCards :column="element" :cards="element.cards"/>
-                
+
                 <CreateCard :column="element" text='Add new card...' addClass="py-4 px-4"/>
             </div>
         </template>
