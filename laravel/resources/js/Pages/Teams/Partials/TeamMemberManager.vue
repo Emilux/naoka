@@ -123,13 +123,27 @@
                 <!-- Team Member List -->
                 <template #content>
                     <div class="space-y-6">
-                        <div class="flex items-center justify-between" v-for="user in team.users" :key="user.id">
+                        <div class="flex flex-wrap items-center justify-between" v-for="user in team.users" :key="user.id">
                             <div class="flex items-center">
-                                <img class="w-8 h-8 rounded-full" :src="user.profile_photo_url" :alt="user.name">
+                                <img class="w-8 h-8 rounded-full border border-2" :style="{borderColor:user.membership.color}" :src="user.profile_photo_url" :alt="user.name">
                                 <div class="ml-4">{{ user.name }}</div>
                             </div>
 
-                            <div class="flex items-center">
+                            <div class="flex items-center mt-4 sm:mt-0 justify-center sm:justify-start w-full sm:w-auto">
+                                <button class="sm:ml-2 text-sm text-gray-400 underline"
+                                        @click="settingColor(user)"
+                                        v-if="userPermissions.canDeleteTeam">
+                                    <template v-if="!user.membership.color">
+                                        Set member color
+                                    </template>
+                                    <template v-else>
+                                        <div class="flex items-center">
+                                            <div class="h-4 w-4 block border mr-2" :style="{backgroundColor:user.membership.color}"></div> Edit Member color
+                                        </div>
+                                    </template>
+
+                                </button>
+
                                 <!-- Manage Team Member Role -->
                                 <button class="ml-2 text-sm text-gray-400 underline"
                                         @click="manageRole(user)"
@@ -160,6 +174,33 @@
                 </template>
             </jet-action-section>
         </div>
+
+        <!-- Member color Modal -->
+        <jet-dialog-modal :show="currentlySettingColor" @close="currentlySettingColor = false">
+            <template #title>
+                Edit member color
+            </template>
+
+            <template #content>
+                <ColorPicker class="mx-auto !w-full !max-w-full" :color="defaultColor" :visible-formats="['hex','rgb']" default-format="hex" alpha-channel="hide" @color-change="updateSelectedColor" >
+                    <template #copy-button>
+                        <i class="naoka-icon SolidCopyPaste text-base"></i>
+                    </template>
+                </ColorPicker>
+
+                <jet-input-error :message="updateColorForm.errors.color" class="mt-2" />
+            </template>
+
+            <template #footer>
+                <jet-secondary-button @click="currentlySettingColor = false">
+                    Cancel
+                </jet-secondary-button>
+
+                <jet-button class="ml-3" @click="updateColor" :class="{ 'opacity-25': updateColorForm.processing }" :disabled="updateColorForm.processing">
+                    Save
+                </jet-button>
+            </template>
+        </jet-dialog-modal>
 
         <!-- Role Management Modal -->
         <jet-dialog-modal :show="currentlyManagingRole" @close="currentlyManagingRole = false">
@@ -200,7 +241,7 @@
                     Cancel
                 </jet-secondary-button>
 
-                <Button class="mt-4 ml-3" color="blue" :wide="true" @click="updateRole" 
+                <Button class="mt-4 ml-3" color="blue" :wide="true" @click="updateRole"
                     :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
                     Save
                 </Button>
@@ -266,12 +307,14 @@
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
     import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
     import SpanInput from '@/Jetstream/SpanInput.vue'
+    import { ColorPicker } from 'vue-accessible-color-picker'
 
     export default defineComponent({
         components: {
             JetActionMessage,
             JetActionSection,
             Button,
+            JetButton,
             JetConfirmationModal,
             JetDangerButton,
             JetDialogModal,
@@ -282,6 +325,7 @@
             JetSecondaryButton,
             JetSectionBorder,
             SpanInput,
+            ColorPicker
         },
 
         props: [
@@ -301,10 +345,16 @@
                     role: null,
                 }),
 
+                updateColorForm: this.$inertia.form({
+                    color: '',
+                }),
+
                 leaveTeamForm: this.$inertia.form(),
                 removeTeamMemberForm: this.$inertia.form(),
 
                 currentlyManagingRole: false,
+                currentlySettingColor: false,
+                defaultColor: '',
                 managingRoleFor: null,
                 confirmingLeavingTeam: false,
                 teamMemberBeingRemoved: null,
@@ -336,6 +386,34 @@
                 this.updateRoleForm.put(route('team-members.update', [this.team, this.managingRoleFor]), {
                     preserveScroll: true,
                     onSuccess: () => (this.currentlyManagingRole = false),
+                })
+            },
+
+            /**
+             * Open color edit modal and set the default color
+             * @param teamMember
+             */
+            settingColor(teamMember) {
+                this.settingColorFor = teamMember
+                this.defaultColor = teamMember.membership.color ? teamMember.membership.color : '#FED766'
+                this.currentlySettingColor = true
+            },
+
+            /**
+             * Update the current color form color
+             * @param color
+             */
+            updateSelectedColor(color){
+                this.updateColorForm.color = color.colors.hex
+            },
+
+            /**
+             * Send data to route to update member color
+             */
+            updateColor() {
+                this.updateColorForm.put(route('team-member.updatecolor', [this.team, this.settingColorFor]), {
+                    preserveScroll: true,
+                    onSuccess: () => (this.currentlySettingColor = false),
                 })
             },
 

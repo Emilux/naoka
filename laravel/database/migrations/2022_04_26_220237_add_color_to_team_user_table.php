@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBoardsTable extends Migration
+class AddColorToTeamUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateBoardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('boards', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 50);
-            $table->uuid('UUID')->unique();
-            $table->foreignId('team_id');
-            $table->timestamps();
+        Schema::table('team_user', function (Blueprint $table) {
+            $table->string('color', 9)->nullable();
         });
     }
 
@@ -29,6 +25,6 @@ class CreateBoardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('boards');
+        Schema::dropColumns('team_user',['color']);
     }
 }

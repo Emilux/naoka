@@ -19,7 +19,8 @@ class DashboardsController extends Controller
      */
     public function index()
     {
-        $boards = Board::where('team_id', Auth::user()->current_team_id)->orderBy('updated_at')->get();
+        $boards = Board::where('team_id', Auth::user()->current_team_id)->orderBy('updated_at','DESC')->get();
+
         $users = DB::table('team_user')
                 ->join('users', function ($join) {
                     $join

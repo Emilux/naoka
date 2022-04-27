@@ -25,7 +25,7 @@
 
         <div class="flex items-center">
             <slot/>
-            <div class="rounded-full ml-8" v-if="$page.props.user">
+            <div class="rounded-full ml-4 sm:ml-8" v-if="$page.props.user">
                 <jet-dropdown align="right" width="48">
                     <template #trigger>
                         <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">

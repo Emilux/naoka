@@ -11,11 +11,10 @@
                             </div>
                         </template>
 
-                        <JetNavLink :href="route('boards.create')" :active="route().current('boards.create')"
-                                    class="flex items-center hover:bg-naoka-blue-hover transition-colors bg-naoka-blue text-white p-4 rounded-xl text-xs sm:text-sm font-raleway font-semibold">
-                            <i class="naoka-icon solidPlus mr-1"></i>
-                            <span>Create kanban</span>
-                        </JetNavLink>
+                        <Button :href="route('boards.create')" color="blue">
+                            <i class="naoka-icon solidPlus sm:mr-2"></i>
+                            <span class="hidden sm:block">Create kanban</span>
+                        </Button>
                     </div>
                         <div class="flex items-center justify-between mt-4 flex-wrap">
                             <template v-if="CollaborateUsers && typeof CollaborateUsers['0'] !== 'undefined'" >
@@ -39,8 +38,9 @@
                             </div>
                             </template>
                             <!-- Team Settings -->
-                            <JetNavLink :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')"  class="ml-auto aspect-square w-8 h-8 flex transition-colors hover:bg-naoka-purple-hover justify-center items-center bg-naoka-purple text-white rounded-full">
+                            <JetNavLink :href="route('teams.show', $page.props.user.current_team)"  class="px-4 h-8 flex transition-colors hover:bg-naoka-purple-hover justify-center items-center bg-naoka-purple text-white rounded-full">
                                 <i class="naoka-icon SolidCog"></i>
+                                Team Settings
                             </JetNavLink>
                         </div>
 
@@ -49,13 +49,16 @@
 
 
                 <div class="flex flex-col mt-8 overflow-auto hide-scrollbar">
-                    <div v-if="boards && typeof boards['0'] !== 'undefined'" class="flex flex-wrap">
-                        <div v-for="board in boards" class="flex flex-wrap mb-12 w-full sm:w-1/2 lg:w-1/3">
-                            <CardKanban :board="board"/>
+                    <div class="flex flex-wrap items-center">
+                       <template v-for="board in boards">
+                           <div class="mb-12 w-full sm:w-1/2 lg:w-1/3">
+                           <CardKanban :board="board"/>
+                           </div>
+                       </template>
+                        <div class="mb-12 w-full sm:w-1/2 lg:w-1/3">
+                            <CardAdd/>
                         </div>
-                    </div>
-                    <div v-else>
-                        <CardAdd/>
+
                     </div>
                 </div>
             </div>
@@ -68,14 +71,14 @@
     import CardKanban from "@/components/Dashboard/CardKanban.vue";
     import CardAdd from "@/components/Dashboard/CardAdd.vue";
     import JetNavLink from '@/Jetstream/NavLink.vue'
-    import { Link } from '@inertiajs/inertia-vue3';
+    import Button from '@/components/Ui/Button'
 
     export default defineComponent({
         components: {
             CardKanban,
             CardAdd,
             JetNavLink,
-            Link,
+            Button,
         },
 
         props: {

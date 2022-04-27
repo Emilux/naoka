@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BoardsController;
+use App\Http\Controllers\TeamMemberController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,7 +37,19 @@ Route::middleware(['auth:sanctum', 'verified'])
             ->name('show');
         Route::get('/boards/create', [BoardsController::class, 'create'])
             ->name('create');
-        Route::post('/boards/store', [BoardsController::class, 'store'])
+        Route::get('/boards/{board:uuid}/edit', [BoardsController::class, 'edit'])
+            ->whereUuid('board')
+            ->name('edit');
+        Route::put('/boards/{board:uuid}/edit', [BoardsController::class, 'update'])
+            ->whereUuid('board')
+            ->name('update');
+        Route::post('/boards/create', [BoardsController::class, 'store'])
             ->name('store');
+        Route::delete('/boards/{board:uuid}/delete', [BoardsController::class, 'destroy'])
+            ->name('destroy');
     });
+
+Route::middleware(['auth:sanctum', 'verified'])->put('/teams/{team}/members/{user}/updatecolor',
+    [TeamMemberController::class, 'updateColor'])
+    ->name('team-member.updatecolor');
 

@@ -8,9 +8,9 @@
             <Navbar class="relative">
                 <jet-dropdown align="right" width="48">
                     <template #trigger>
-                        <Button color="blue">
-                            Create
-                            <i class="naoka-icon solidPlus ml-2"></i>
+                        <Button color="blue" type="button" as="button" preserve-state>
+                            <div class="hidden sm:block">Create</div>
+                            <i class="naoka-icon solidPlus sm:ml-2"></i>
                         </Button>
                     </template>
 

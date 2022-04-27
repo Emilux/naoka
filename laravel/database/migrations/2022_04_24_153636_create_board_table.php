@@ -17,6 +17,7 @@ class CreateBoardTable extends Migration
             $table->id();
             $table->string('name', 50);
             $table->uuid('uuid')->unique();
+            $table->string('identifier', 5);
             $table->foreignId('team_id');
             $table->timestamps();
         });

@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
+use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team as JetstreamTeam;
 
 class Team extends JetstreamTeam
@@ -41,4 +43,18 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    /**
+     * Get all of the users that belong to the team.
+     *
+     * @return BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(Jetstream::userModel(), Jetstream::membershipModel())
+            ->withPivot('color')
+            ->withPivot('role')
+            ->withTimestamps()
+            ->as('membership');
+    }
 }

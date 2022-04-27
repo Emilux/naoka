@@ -14,7 +14,8 @@ class Board extends Model
     use HasUuid;
 
     protected $fillable = [
-        'name'
+        'name',
+        'identifier',
     ];
 
     /**
