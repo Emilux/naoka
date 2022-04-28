@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBoardTable extends Migration
+class CreateCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateBoardTable extends Migration
      */
     public function up()
     {
-        Schema::create('boards', function (Blueprint $table) {
+        Schema::create('cards', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('column_id');
             $table->string('name', 50);
-            $table->uuid('uuid')->unique();
-            $table->string('identifier', 5);
-            $table->foreignId('team_id');
+            $table->text('description')->nullable();
+            $table->string('position');
+            $table->boolean('archive')->default(1);
+            $table->integer('count');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateBoardTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('boards');
+        Schema::dropIfExists('cards');
     }
 }

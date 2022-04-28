@@ -17,22 +17,15 @@ class DashboardsController extends Controller
      * @TODO add identifiant for a kanban in CardKanban
      *
      */
-    public function index()
+    public function index(Request $request)
     {
         $boards = Board::where('team_id', Auth::user()->current_team_id)->orderBy('updated_at','DESC')->get();
 
-        $users = DB::table('team_user')
-                ->join('users', function ($join) {
-                    $join
-                        ->on('team_user.id', '=', 'users.id')
-                        ->where('team_user.team_id', '=', Auth::user()->current_team_id);
-                })
-                ->select('users.name', 'users.profile_photo_path')
-                ->get();
+        $team = $request->user()->currentTeam;
 
         return Inertia::render('Dashboard', [
             'boards' => $boards,
-            'CollaborateUsers' => $users,
+            'CollaborateUsers' => $team->users,
         ]);
     }
 }

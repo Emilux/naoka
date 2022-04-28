@@ -26,4 +26,19 @@ class Board extends Model
         return $this->belongsTo(Team::class, 'team_id')->first();
     }
 
+    /**
+     * Get all column for current boards.
+     */
+    public function columns()
+    {
+        return $this->hasMany(Column::class, 'board_id')->where('archive', '=', 1)->sorted();
+    }
+
+    /**
+     * Get all cards for current boards.
+     */
+    public function cards()
+    {
+        return $this->hasManyThrough(Card::class, Column::class)->get();
+    }
 }
