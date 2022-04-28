@@ -77,6 +77,16 @@ Route::middleware(['auth:sanctum', 'verified'])
             ->whereNumber('column')
             ->whereNumber('card')
             ->name('column.card.destroy');
+
+        Route::put('/{board:uuid}/column/{column}/move', [ColumnsController::class, 'moveColumn'])
+            ->whereUuid('board')
+            ->whereNumber('column')
+            ->name('column.move');
+        Route::put('/{board:uuid}/column/{column}/move/{card}', [CardsController::class, 'moveCard'])
+            ->whereUuid('board')
+            ->whereNumber('column')
+            ->whereNumber('card')
+            ->name('column.card.move');
     });
 
 Route::middleware(['auth:sanctum', 'verified'])->put('/teams/{team}/members/{user}/updatecolor',

@@ -17,14 +17,21 @@
                 Work with kanban board
             </template>
             <template v-slot:content>
-                I'm the content
+                Use naoka to create simple kanban boards.
             </template>
             <template v-slot:link>
                 Learn more
                 <i class="naoka-icon SolidChevronRight ml-2"></i>
             </template>
         </Hero>
-        <Banner/>
+        <Banner :linkHref="route('register')">
+            <template v-slot:title>
+                You need a kanban solution for your project ?
+            </template>
+            <template v-slot:content>
+                <span class="mb-4 block">Naoka let you create simple kanban boards for your projects.</span>
+            </template>
+        </Banner>
         <section class="py-16 relative flex flex-col-reverse items-center">
             <div class="lg:px-32 xl:px-64 lg:mx-auto -mt-24 md:mt-0 relative z-10 md:z-0 container">
                 <img id="teams-image" class="relative z-10" src="/images/teams_illustration.png" alt="">
@@ -36,18 +43,14 @@
             </div>
             <div class="md:absolute bottom-8 overflow-hidden py-8 sm:pt-0 container">
                 <div id="section" class="px-8 pt-8 shadow-base rounded-xl pb-28 md:pb-8 text-center md:w-2/5 md:mx-auto bg-white">
-                    <h2 class="font-semibold mb-8 ">Lorem ipsum dolor ipsumeto</h2>
+                    <h2 class="font-semibold mb-8 ">Team system</h2>
                     <div class="text-left mb-8">
                         <p class="mb-4">
-                            Lorem ipsum dolor ipsumeto la quuenata loca que ota boy ? commen toutou pelle ? random text...
-                        </p>
-                        <p>
-                            Lorem ipsum dolor ipsumeto la quuenata loca que ota boy ? commen toutou pelle ? random text... Poco uno pocito de lespanola
-                            de qunatidado de langaga
+                            With naoka you can create multiple differents teams and invite new member, that will have access to the boards you created inside the team.
                         </p>
                     </div>
 
-                    <Button :wide="true" color="yellow">
+                    <Button :href="route('register')" :wide="true" color="yellow">
                         Create your team
                     </Button>
                 </div>
