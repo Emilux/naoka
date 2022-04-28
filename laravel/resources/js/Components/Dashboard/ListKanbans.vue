@@ -55,7 +55,7 @@
                            <CardKanban :board="board"/>
                            </div>
                        </template>
-                        
+
                         <div class="mb-12 w-full sm:w-1/2 lg:w-1/3">
                             <CardAdd/>
                         </div>

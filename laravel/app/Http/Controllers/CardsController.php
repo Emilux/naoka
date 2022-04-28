@@ -71,4 +71,34 @@ class CardsController extends Controller
 
         return Redirect::route('boards.show', ['board' => $board->uuid], 303);
     }
+
+
+    /**
+     * Move card position
+     *
+     * @param Request $request
+     * @param Board $board
+     * @param Column $column
+     */
+    public function moveCard(Request $request, Board $board, Column $column, Card $card){
+
+        $validated = $request->validate([
+            'prevCardId' => 'nullable|integer',
+            'nextCardId' => 'nullable|integer',
+        ]);
+
+        if (!empty($validated['prevCardId']) || !empty($validated['nextCardId'])){
+            if (empty($validated['prevCardId'])){
+                $nextCard = Card::find($validated['nextCardId']);
+                $card->moveBefore($nextCard);
+            } else {
+                $prevCard = Card::find($validated['prevCardId']);
+                $card->moveAfter($prevCard);
+            }
+        }
+
+        $card->update(['column_id' => $column->id]);
+
+        return back(303);
+    }
 }

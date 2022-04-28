@@ -7,6 +7,7 @@
         :delay="100"
         :force-fallback="true"
         group="columns"
+        @change="moveColumn"
         handle=".handle"
     >
         <template #item="{ element }" :key="element.id">
@@ -20,7 +21,7 @@
                 </div>
 
                 <ViewCards :column="element" :cards="element.cards"/>
-                
+
                 <CreateCard :column="element" text='Add new card...' addClass="py-4 px-4"/>
             </div>
         </template>
@@ -51,12 +52,22 @@ export default {
         return {
             hasScroll: true,
             drag: true,
+            form: this.$inertia.form()
         }
     },
 
     methods:{
-        log: function () {
-            console.log('click')
+        moveColumn: function (e) {
+            const newIndex = e.moved.newIndex
+            const nextIndex = newIndex+1
+            const prevIndex = newIndex-1
+            const nextColId = nextIndex > this.columns.length-1 ? null : this.columns[nextIndex].id
+            const prevColId = prevIndex < 0 ? null : this.columns[prevIndex].id
+
+            this.form.put(route('boards.column.move', {board:this.$page.props.board,column:e.moved.element,nextColumnId:nextColId,prevColumnId:prevColId}), {
+                errorBag: 'moveColumn',
+                preserveScroll: false
+            });
         }
     }
 }

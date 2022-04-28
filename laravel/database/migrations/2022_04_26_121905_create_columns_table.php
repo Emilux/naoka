@@ -15,9 +15,11 @@ class CreateColumnsTable extends Migration
     {
         Schema::create('columns', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('board_id');
+            $table->foreignId('board_id')
+                ->references('id')->on('boards')
+                ->onDelete('cascade');
             $table->string('name', 50);
-            $table->string('position');
+            $table->string('position',50);
             $table->boolean('archive')->default(1);
             $table->timestamps();
         });

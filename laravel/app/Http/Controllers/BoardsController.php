@@ -16,7 +16,7 @@ class BoardsController extends Controller
 
     /**
      * Show the form for creating a new Board.
-     * 
+     *
      * @param Request $request
      * @return Response
      */
@@ -55,7 +55,7 @@ class BoardsController extends Controller
 
     /**
      * Display the board using his Uuid.
-     * 
+     *
      * @param Request $request
      * @param Board $board
      * @return Response
@@ -72,14 +72,12 @@ class BoardsController extends Controller
             abort(401, 'You cannot read this board');
         }
 
-        // dd($board->columns()->with('cards')->sorted()->get());
-
         return Inertia::render('Boards/Show', ['board' => $board, 'columns' => $board->columns()->with('cards')->get()]);
     }
 
     /**
      * Show the form for editing a board.
-     * 
+     *
      * @param Request $request
      * @param Board $board
      * @return Response
@@ -153,7 +151,7 @@ class BoardsController extends Controller
 
     /**
      * Generate an 1 or 2 character(s) long identifier from a string
-     * 
+     *
      * @param String $string
      * @return string
      */

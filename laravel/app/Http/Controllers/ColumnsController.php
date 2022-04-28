@@ -64,4 +64,33 @@ class ColumnsController extends Controller
 
         return Redirect::route('boards.show', ['board' => $board->uuid], 303);
     }
+
+    /**
+     * Move column position
+     *
+     * @param Request $request
+     * @param Board $board
+     * @param Column $column
+     */
+    public function moveColumn(Request $request, Board $board, Column $column){
+
+        $validated = $request->validate([
+            'prevColumnId' => 'nullable|integer',
+            'nextColumnId' => 'nullable|integer',
+        ]);
+
+        if (empty($validated['prevColumnId']) && empty($validated['nextColumnId'])){
+            abort(403,"You cannot move this column");
+        }
+
+        if (empty($validated['prevColumnId'])){
+            $nextColumn = Column::find($validated['nextColumnId']);
+            $column->moveBefore($nextColumn);
+        } else {
+            $prevColumn = Column::find($validated['prevColumnId']);
+            $column->moveAfter($prevColumn);
+        }
+
+        return back(303);
+    }
 }
